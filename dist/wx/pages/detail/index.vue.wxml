@@ -1,0 +1,17 @@
+<template name="48d7b700">
+  <view class="_div data-v-26ffd48e detail">
+    <van-cell-group class="_van-cell-group data-v-26ffd48e">
+      <van-cell-group class="_van-cell-group data-v-26ffd48e">
+        <van-field value="{{name}}" clearable label="地点位置" placeholder="请输入地点位置" class="_van-field data-v-26ffd48e"></van-field>
+        <van-field value="{{name}}" clearable label="情况描述" placeholder="请输入情况描述" type="textarea" autosize="{{autosize}}" class="_van-field data-v-26ffd48e"></van-field>
+        <van-field value="{{name}}" clearable label="情况照片" placeholder="请选择情况照片" class="_van-field data-v-26ffd48e"></van-field>
+        <van-field value="{{name}}" clearable label="风险隐患" placeholder="请输入风险隐患" type="textarea" autosize="{{autosize}}" class="_van-field data-v-26ffd48e"></van-field>
+        <van-field value="{{name}}" clearable label="建议措施" placeholder="请输入建议措施" type="textarea" autosize="{{autosize}}" class="_van-field data-v-26ffd48e"></van-field>
+        <van-field value="{{name}}" clearable label="备注" placeholder="请输入备注" type="textarea" autosize="{{autosize}}" class="_van-field data-v-26ffd48e"></van-field>
+      </van-cell-group>
+    </van-cell-group>
+    <view class="_div data-v-26ffd48e okbtn">
+      <van-button type="primary" size="large" class="_van-button data-v-26ffd48e">确定</van-button>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,6 @@
+<template name="14d54042">
+  <view class="_div data-v-78588440 home">
+    <view class="_h1 data-v-78588440">待开发区域</view>
+    <txv-video class="_txv-video data-v-78588440 video" vid="e0354z3cqjp" playerid="txv1"></txv-video>
+  </view>
+</template>
