@@ -9,10 +9,15 @@
     </van-cell-group>
     <view class="_div data-v-26ffd48e choose-img">
       <view class="_div data-v-26ffd48e label">选择图片</view>
-      <van-uploader max-count="1" fileList="{{situation.fileList}}" bindafterRead="handleProxy" binddelete="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}" class="_van-uploader data-v-26ffd48e"></van-uploader>
+      <van-uploader max-count="1" file-list="{{situation.pictureUrl}}" bindafterRead="handleProxy" binddelete="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}" class="_van-uploader data-v-26ffd48e"></van-uploader>
     </view>
     <view class="_div data-v-26ffd48e okbtn">
-      <van-button type="primary" size="large" bindtap="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}" class="_van-button data-v-26ffd48e">确定</van-button>
+      <view class="_div data-v-26ffd48e btn">
+        <van-button size="large" type="primary" bindtap="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}" class="_van-button data-v-26ffd48e">确定</van-button>
+      </view>
+      <view class="_div data-v-26ffd48e btn" style="margin-left: 40rpx;" wx:if="{{type === 'update'}}">
+        <van-button size="large" type="danger" bindtap="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}" class="_van-button data-v-26ffd48e">删除</van-button>
+      </view>
     </view>
   </view>
 </template>

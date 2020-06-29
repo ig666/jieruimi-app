@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { request } from "@/request/request";
 export default {
   data() {
     return {};
@@ -11,10 +12,9 @@ export default {
   components: {},
 
   methods: {},
-
-  created() {
-    // let app = getApp()
-  }
+  async onShow() {
+    // let res = await request("api");
+  },
 };
 </script>
 

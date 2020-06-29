@@ -13,8 +13,9 @@ const store = new Vuex.Store({
       obj.situations.push(value)
     },
     decrement: (state,index) => {
+      console.log('index',index)
       const obj = state
-      obj.situations.splice(0,index)
+      obj.situations.splice(index,1)
     }
   }
 })

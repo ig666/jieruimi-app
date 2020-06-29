@@ -1,24 +1,15 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([6],[
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
+global.webpackJsonpMpvue([6],{
+
+/***/ 46:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(47);
 
 
 
@@ -26,18 +17,19 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MOD
 app.$mount();
 
 /***/ }),
-/* 11 */
+
+/***/ 47:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_982d601a_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_982d601a_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(50);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(12)
+  __webpack_require__(48)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 
 /* template */
@@ -79,30 +71,22 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 12 */
+
+/***/ 48:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 13 */
+
+/***/ 49:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_store__ = __webpack_require__(3);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_get_iterator__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_get_iterator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_get_iterator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_store__ = __webpack_require__(25);
+
 //
 //
 //
@@ -264,10 +248,11 @@ if (false) {(function () {
 //
 
 
-var situations = __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.situations;
+var situations = __WEBPACK_IMPORTED_MODULE_1__store_store__["a" /* default */].state.situations;
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
+      situations: situations,
       show: false,
       form: {
         name: "",
@@ -299,7 +284,38 @@ var situations = __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].s
       }
     },
     ok: function ok() {
-      console.log(this.form);
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_get_iterator___default()(this.form.discoverItemList), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var item = _step.value;
+
+          console.log(item.pictureUrl[0].url);
+          wx.uploadFile({
+            url: 'http://120.26.187.170/files', //开发者服务器 url
+            filePath: item.pictureUrl[0].url, //要上传文件资源的路径
+            name: 'file', //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+            success: function success(res) {
+              console.log(res);
+            }
+          });
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
     },
     checkDateChange: function checkDateChange(val) {
       this.form.checkDate = val.mp.detail.value;
@@ -310,7 +326,7 @@ var situations = __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].s
     onClose: function onClose() {
       this.show = false;
     },
-    checkDetails: function checkDetails(item) {
+    checkDetails: function checkDetails(item, index) {
       if (item === "add") {
         wx.navigateTo({
           url: "/pages/detail/main?type=add"
@@ -320,7 +336,7 @@ var situations = __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].s
           url: "/pages/detail/main?type=update",
           success: function success(res) {
             // 通过eventChannel向被打开页面传送数据
-            res.eventChannel.emit("detailNew", { data: { item: item } });
+            res.eventChannel.emit("detailNew", { data: { item: item, index: index } });
           }
         });
       }
@@ -329,7 +345,8 @@ var situations = __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].s
 });
 
 /***/ }),
-/* 14 */
+
+/***/ 50:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -342,7 +359,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "position": "top",
       "custom-style": "height: 40%;width:100%",
       "eventid": '2',
-      "mpcomid": '4'
+      "mpcomid": '3'
     },
     on: {
       "close": _vm.onClose
@@ -350,7 +367,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('van-grid', {
     attrs: {
       "column-num": "3",
-      "mpcomid": '3'
+      "mpcomid": '2'
     }
   }, [_vm._l((_vm.form.discoverItemList), function(item, index) {
     return _c('van-grid-item', {
@@ -358,24 +375,21 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       attrs: {
         "icon": "todo-list",
         "text": item.location,
-        "use-slot": "",
         "eventid": '0_' + index,
-        "mpcomid": '1_' + index
+        "mpcomid": '0_' + index
       },
       on: {
         "click": function($event) {
-          _vm.checkDetails(item)
+          _vm.checkDetails(item, index)
         }
       }
-    }, [_vm._t("default", [_vm._v("\n        我干\n      ")], {
-      mpcomid: '0_' + index
-    })], 2)
+    })
   }), _vm._v(" "), _c('van-grid-item', {
     attrs: {
       "text": "添加现场情况",
       "icon": "plus",
       "eventid": '1',
-      "mpcomid": '2'
+      "mpcomid": '1'
     },
     on: {
       "click": function($event) {
@@ -384,13 +398,13 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 2)], 1), _vm._v(" "), _c('van-sticky', {
     attrs: {
-      "mpcomid": '6'
+      "mpcomid": '5'
     }
   }, [_c('van-button', {
     attrs: {
       "type": "info",
       "eventid": '3',
-      "mpcomid": '5'
+      "mpcomid": '4'
     },
     on: {
       "click": function () {
@@ -401,11 +415,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "title"
   }, [_vm._v("现场有害生物防治服务报告")]), _vm._v(" "), _c('van-cell-group', {
     attrs: {
-      "mpcomid": '21'
+      "mpcomid": '20'
     }
   }, [_c('van-cell-group', {
     attrs: {
-      "mpcomid": '20'
+      "mpcomid": '19'
     }
   }, [_c('van-field', {
     attrs: {
@@ -415,7 +429,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "客户名称",
       "placeholder": "请输入客户名称",
       "eventid": '4',
-      "mpcomid": '7'
+      "mpcomid": '6'
     },
     on: {
       "change": function($event) {
@@ -436,7 +450,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "required": "",
       "label": "检查日期",
       "placeholder": "请选择检查日期",
-      "mpcomid": '8'
+      "mpcomid": '7'
     }
   })], 1), _vm._v(" "), _c('picker', {
     attrs: {
@@ -452,7 +466,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "required": "",
       "label": "报告日期",
       "placeholder": "请选择报告日期",
-      "mpcomid": '9'
+      "mpcomid": '8'
     }
   })], 1), _vm._v(" "), _c('van-field', {
     attrs: {
@@ -462,7 +476,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "检查人员",
       "placeholder": "请输入检查人员",
       "eventid": '7',
-      "mpcomid": '10'
+      "mpcomid": '9'
     },
     on: {
       "change": function($event) {
@@ -479,7 +493,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "textarea",
       "autosize": _vm.autosize,
       "eventid": '8',
-      "mpcomid": '11'
+      "mpcomid": '10'
     },
     on: {
       "change": function($event) {
@@ -496,7 +510,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "textarea",
       "autosize": _vm.autosize,
       "eventid": '9',
-      "mpcomid": '12'
+      "mpcomid": '11'
     },
     on: {
       "change": function($event) {
@@ -511,7 +525,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "服务商名称",
       "placeholder": "请输入服务商名称",
       "eventid": '10',
-      "mpcomid": '13'
+      "mpcomid": '12'
     },
     on: {
       "change": function($event) {
@@ -526,7 +540,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "服务人员",
       "placeholder": "请输入服务人员",
       "eventid": '11',
-      "mpcomid": '14'
+      "mpcomid": '13'
     },
     on: {
       "change": function($event) {
@@ -541,7 +555,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "联系电话",
       "placeholder": "请输入联系电话",
       "eventid": '12',
-      "mpcomid": '15'
+      "mpcomid": '14'
     },
     on: {
       "change": function($event) {
@@ -555,7 +569,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "随行人员",
       "placeholder": "请输入随行人员",
       "eventid": '13',
-      "mpcomid": '16'
+      "mpcomid": '15'
     },
     on: {
       "change": function($event) {
@@ -571,7 +585,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "textarea",
       "autosize": _vm.autosize,
       "eventid": '14',
-      "mpcomid": '17'
+      "mpcomid": '16'
     },
     on: {
       "change": function($event) {
@@ -587,7 +601,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "textarea",
       "autosize": _vm.autosize,
       "eventid": '15',
-      "mpcomid": '18'
+      "mpcomid": '17'
     },
     on: {
       "change": function($event) {
@@ -603,7 +617,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "textarea",
       "autosize": _vm.autosize,
       "eventid": '16',
-      "mpcomid": '19'
+      "mpcomid": '18'
     },
     on: {
       "change": function($event) {
@@ -617,7 +631,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "primary",
       "size": "large",
       "eventid": '17',
-      "mpcomid": '22'
+      "mpcomid": '21'
     },
     on: {
       "click": _vm.ok
@@ -636,4 +650,5 @@ if (false) {
 }
 
 /***/ })
-],[10]);
+
+},[46]);

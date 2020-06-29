@@ -1,8 +1,8 @@
-<import src="/components/slots" /><template name="6c0c9092">
-  <view class="_div data-v-982d601a form"><template name="default"> 我干 </template>
+<template name="6c0c9092">
+  <view class="_div data-v-982d601a form">
     <van-popup show="{{show}}" position="top" custom-style="height: 40%;width:100%" bindclose="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_van-popup data-v-982d601a">
       <van-grid column-num="3" class="_van-grid data-v-982d601a">
-        <van-grid-item icon="todo-list" text="{{item.location}}" wx:key="index" key="{{index}}" bindtap="handleProxy" use-slot data-eventid="{{'0_'+index}}" data-comkey="{{$k}}" wx:for="{{form.discoverItemList}}" wx:for-index="index" wx:for-item="item" class="_van-grid-item data-v-982d601a"><template data="{{...$root[$p], ...$root[$k], $root}}" is="{{$slotdefault || 'default'}}"></template></van-grid-item>
+        <van-grid-item icon="todo-list" text="{{item.location}}" wx:key="index" key="{{index}}" bindtap="handleProxy" data-eventid="{{'0_'+index}}" data-comkey="{{$k}}" wx:for="{{form.discoverItemList}}" wx:for-index="index" wx:for-item="item" class="_van-grid-item data-v-982d601a"></van-grid-item>
         <van-grid-item text="添加现场情况" icon="plus" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_van-grid-item data-v-982d601a"></van-grid-item>
       </van-grid>
     </van-popup>

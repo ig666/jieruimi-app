@@ -4,6 +4,11 @@
 }
 .detail .okbtn.data-v-26ffd48e {
   margin-top: 150rpx;
+  display: flex;
+  justify-content: center;
+}
+.detail .okbtn .btn.data-v-26ffd48e {
+  width: 200rpx;
 }
 .detail .choose-img.data-v-26ffd48e {
   display: flex;
