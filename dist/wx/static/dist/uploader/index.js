@@ -118,7 +118,7 @@ VantComponent({
       if (useBeforeRead) {
         res = new Promise((resolve, reject) => {
           this.$emit(
-            'before-read',
+            'beforeRead',
             Object.assign(Object.assign({ file }, this.getDetail()), {
               callback: (ok) => {
                 ok ? resolve() : reject();
@@ -148,7 +148,7 @@ VantComponent({
       if (typeof this.data.afterRead === 'function') {
         this.data.afterRead(file, this.getDetail());
       }
-      this.$emit('after-read', Object.assign({ file }, this.getDetail()));
+      this.$emit('afterRead', Object.assign({ file }, this.getDetail()));
     },
     deleteItem(event) {
       const { index } = event.currentTarget.dataset;
@@ -178,7 +178,7 @@ VantComponent({
       const { index } = event.currentTarget.dataset;
       const item = this.data.lists[index];
       this.$emit(
-        'click-preview',
+        'clickPreview',
         Object.assign(Object.assign({}, item), this.getDetail(index))
       );
     },

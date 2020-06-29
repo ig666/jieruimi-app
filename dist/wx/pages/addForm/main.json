@@ -8,6 +8,7 @@
     "van-button": "/static/dist/button/index",
     "van-popup": "/static/dist/popup/index",
     "van-grid": "/static/dist/grid/index",
-  "van-grid-item": "/static/dist/grid-item/index"
+    "van-grid-item": "/static/dist/grid-item/index",
+    "van-icon": "/static/dist/icon/index"
   }
 }

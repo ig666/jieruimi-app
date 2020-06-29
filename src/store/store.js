@@ -5,16 +5,16 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    situation: [{name:'杰瑞米'}]
+    situations: []
   },
   mutations: {
-    increment: (state) => {
+    increment: (state,value) => {
       const obj = state
-      obj.count += 1
+      obj.situations.push(value)
     },
-    decrement: (state) => {
+    decrement: (state,index) => {
       const obj = state
-      obj.count -= 1
+      obj.situations.splice(0,index)
     }
   }
 })

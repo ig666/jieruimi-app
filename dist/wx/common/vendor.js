@@ -6017,16 +6017,16 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   state: {
-    situation: [{ name: '杰瑞米' }]
+    situations: []
   },
   mutations: {
-    increment: function increment(state) {
+    increment: function increment(state, value) {
       var obj = state;
-      obj.count += 1;
+      obj.situations.push(value);
     },
-    decrement: function decrement(state) {
+    decrement: function decrement(state, index) {
       var obj = state;
-      obj.count -= 1;
+      obj.situations.splice(0, index);
     }
   }
 });

@@ -1,13 +1,14 @@
 {
-    "navigationBarTitleText": "情况发现",
-    "usingComponents": {
-      "van-cell": "/static/dist/cell/index",
-      "van-cell-group": "/static/dist/cell-group/index",
-      "van-field": "/static/dist/field/index",
-      "van-sticky": "/static/dist/sticky/index",
-      "van-button": "/static/dist/button/index",
-      "van-popup": "/static/dist/popup/index",
-      "van-grid": "/static/dist/grid/index",
-    "van-grid-item": "/static/dist/grid-item/index"
-    }
+  "navigationBarTitleText": "情况发现",
+  "usingComponents": {
+    "van-cell": "/static/dist/cell/index",
+    "van-cell-group": "/static/dist/cell-group/index",
+    "van-field": "/static/dist/field/index",
+    "van-sticky": "/static/dist/sticky/index",
+    "van-button": "/static/dist/button/index",
+    "van-popup": "/static/dist/popup/index",
+    "van-grid": "/static/dist/grid/index",
+    "van-grid-item": "/static/dist/grid-item/index",
+    "van-uploader": "/static/dist/uploader/index"
   }
+}
