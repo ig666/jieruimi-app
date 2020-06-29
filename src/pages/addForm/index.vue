@@ -10,11 +10,16 @@
       <van-grid column-num="3">
         <van-grid-item
           icon="todo-list"
-          :text="item.name"
-          v-for="(item, index) of situation"
+          :text="item.location"
+          v-for="(item, index) of form.discoverItemList"
           :key="index"
-          @click="checkDetails(item, index)"
-        />
+          @click="checkDetails(item)"
+          use-slot
+        >
+        <slot>
+          我干
+        </slot>
+        </van-grid-item>
         <van-grid-item
           text="添加现场情况"
           icon="plus"
@@ -31,8 +36,7 @@
           }
         "
         type="info"
-        >添加发现情况</van-button
-      >
+      >添加发现情况</van-button>
     </van-sticky>
     <!-- 内容 -->
     <div class="title">现场有害生物防治服务报告</div>
@@ -46,7 +50,10 @@
           label="客户名称"
           placeholder="请输入客户名称"
         />
-        <picker mode="date" @change="checkDateChange">
+        <picker
+          mode="date"
+          @change="checkDateChange"
+        >
           <van-field
             :value="form.checkDate"
             required
@@ -54,7 +61,10 @@
             placeholder="请选择检查日期"
           />
         </picker>
-        <picker mode="date" @change="reportDateChange">
+        <picker
+          mode="date"
+          @change="reportDateChange"
+        >
           <van-field
             :value="form.reportDate"
             required
@@ -71,30 +81,12 @@
           placeholder="请输入检查人员"
         />
         <van-field
-          :value="form.accompanyPerson"
-          required
-          @change="modelChange($event,'accompanyPerson')"
-          clearable
-          label="随行人员"
-          placeholder="请输入随行人员"
-        />
-        <van-field
           :value="form.checkArea"
           required
           @change="modelChange($event,'checkArea')"
           clearable
           label="检查区域"
           placeholder="请输入检查区域"
-          type="textarea"
-          :autosize="autosize"
-        />
-        <van-field
-          :value="form.inspectionItem"
-          required
-          @change="modelChange($event,'inspectionItem')"
-          clearable
-          label="检查项目"
-          placeholder="请输入检查项目"
           type="textarea"
           :autosize="autosize"
         />
@@ -109,9 +101,48 @@
           :autosize="autosize"
         />
         <van-field
-          :value="form"
+          :value="form.serviceProvider"
           required
-          @change="modelChange"
+          @change="modelChange($event,'serviceProvider')"
+          clearable
+          label="服务商名称"
+          placeholder="请输入服务商名称"
+        />
+        <van-field
+          :value="form.server"
+          required
+          @change="modelChange($event,'server')"
+          clearable
+          label="服务人员"
+          placeholder="请输入服务人员"
+        />
+        <van-field
+          :value="form.phone"
+          required
+          @change="modelChange($event,'phone')"
+          clearable
+          label="联系电话"
+          placeholder="请输入联系电话"
+        />
+        <van-field
+          :value="form.accompanyPerson"
+          @change="modelChange($event,'accompanyPerson')"
+          clearable
+          label="随行人员"
+          placeholder="请输入随行人员"
+        />
+        <van-field
+          :value="form.inspectionItem"
+          @change="modelChange($event,'inspectionItem')"
+          clearable
+          label="检查项目"
+          placeholder="请输入检查项目"
+          type="textarea"
+          :autosize="autosize"
+        />
+        <van-field
+          :value="form.checkMethod"
+          @change="modelChange($event,'checkMethod')"
           clearable
           label="检查方法"
           placeholder="请输入检查方法"
@@ -119,33 +150,8 @@
           :autosize="autosize"
         />
         <van-field
-          :value="form"
-          required
-          @change="modelChange"
-          clearable
-          label="服务人员"
-          placeholder="请输入服务人员"
-        />
-        <van-field
-          :value="form"
-          required
-          @change="modelChange"
-          clearable
-          label="联系电话"
-          placeholder="请输入联系电话"
-        />
-        <van-field
-          :value="form"
-          required
-          @change="modelChange"
-          clearable
-          label="服务商名称"
-          placeholder="请输入服务商名称"
-        />
-        <van-field
-          :value="form"
-          required
-          @change="modelChange"
+          :value="form.remark"
+          @change="modelChange($event,'remark')"
           clearable
           label="备注"
           placeholder="请输入备注"
@@ -155,40 +161,49 @@
       </van-cell-group>
     </van-cell-group>
     <div class="okbtn">
-      <van-button @click="ok" type="primary" size="large">生成报告</van-button>
+      <van-button
+        @click="ok"
+        type="primary"
+        size="large"
+      >生成报告</van-button>
     </div>
   </div>
 </template>
 
 <script>
 import store from "../../store/store";
-const situation = store.state.situation;
+const situations = store.state.situations;
 export default {
   data() {
     return {
-      situation,
       show: false,
       form: {
         name: "",
         checkDate: "",
         reportDate: "",
         checkPerson: "",
-        accompanyPerson:"",
-        checkArea:"",
-        inspectionItem:"",
-        overallDescription:"",
+        accompanyPerson: "",
+        checkArea: "",
+        inspectionItem: "",
+        overallDescription: "",
+        serviceProvider:"",
+        server:"",
+        phone:"",
+        checkMethod:"",
+        remark:"",
+        discoverItemList:situations
       },
       autosize: { maxHeight: 100, minHeight: 50 },
     };
   },
   methods: {
     //非受控组件值绑定
-    modelChange(val,key) {
-        for(let item in this.form){
-            if(item===key){
-                this.form[item]=val.mp.detail
-            }
+    modelChange(val, key) {
+      for (let item in this.form) {
+        if (item === key) {
+          this.form[item] = val.mp.detail
         }
+      }
     },
     ok() {
       console.log(this.form);
@@ -202,7 +217,7 @@ export default {
     onClose() {
       this.show = false;
     },
-    checkDetails(item, index) {
+    checkDetails(item) {
       if (item === "add") {
         wx.navigateTo({
           url: "/pages/detail/main?type=add",
@@ -212,7 +227,7 @@ export default {
           url: "/pages/detail/main?type=update",
           success: function (res) {
             // 通过eventChannel向被打开页面传送数据
-            res.eventChannel.emit("detailNew", { data: { item, index } });
+            res.eventChannel.emit("detailNew", { data: { item } });
           },
         });
       }

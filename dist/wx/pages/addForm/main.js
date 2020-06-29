@@ -31,7 +31,7 @@ app.$mount();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_982d601a_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_ee2cf47e_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(14);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -45,17 +45,17 @@ var normalizeComponent = __webpack_require__(1)
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-982d601a"
+var __vue_scopeId__ = "data-v-ee2cf47e"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_982d601a_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_ee2cf47e_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src\\pages\\addForm\\index.vue"
+Component.options.__file = "src/pages/addForm/index.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -66,9 +66,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-982d601a", Component.options)
+    hotAPI.createRecord("data-v-ee2cf47e", Component.options)
   } else {
-    hotAPI.reload("data-v-982d601a", Component.options)
+    hotAPI.reload("data-v-ee2cf47e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -252,13 +252,22 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
-var situation = __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.situation;
+var situations = __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].state.situations;
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
-      situation: situation,
       show: false,
       form: {
         name: "",
@@ -268,7 +277,13 @@ var situation = __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].st
         accompanyPerson: "",
         checkArea: "",
         inspectionItem: "",
-        overallDescription: ""
+        overallDescription: "",
+        serviceProvider: "",
+        server: "",
+        phone: "",
+        checkMethod: "",
+        remark: "",
+        discoverItemList: situations
       },
       autosize: { maxHeight: 100, minHeight: 50 }
     };
@@ -295,7 +310,7 @@ var situation = __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].st
     onClose: function onClose() {
       this.show = false;
     },
-    checkDetails: function checkDetails(item, index) {
+    checkDetails: function checkDetails(item) {
       if (item === "add") {
         wx.navigateTo({
           url: "/pages/detail/main?type=add"
@@ -305,7 +320,7 @@ var situation = __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].st
           url: "/pages/detail/main?type=update",
           success: function success(res) {
             // 通过eventChannel向被打开页面传送数据
-            res.eventChannel.emit("detailNew", { data: { item: item, index: index } });
+            res.eventChannel.emit("detailNew", { data: { item: item } });
           }
         });
       }
@@ -327,7 +342,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "position": "top",
       "custom-style": "height: 40%;width:100%",
       "eventid": '2',
-      "mpcomid": '3'
+      "mpcomid": '4'
     },
     on: {
       "close": _vm.onClose
@@ -335,29 +350,32 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('van-grid', {
     attrs: {
       "column-num": "3",
-      "mpcomid": '2'
+      "mpcomid": '3'
     }
-  }, [_vm._l((_vm.situation), function(item, index) {
+  }, [_vm._l((_vm.form.discoverItemList), function(item, index) {
     return _c('van-grid-item', {
       key: index,
       attrs: {
         "icon": "todo-list",
-        "text": item.name,
+        "text": item.location,
+        "use-slot": "",
         "eventid": '0_' + index,
-        "mpcomid": '0_' + index
+        "mpcomid": '1_' + index
       },
       on: {
         "click": function($event) {
-          _vm.checkDetails(item, index)
+          _vm.checkDetails(item)
         }
       }
-    })
+    }, [_vm._t("default", [_vm._v("\n        我干\n      ")], {
+      mpcomid: '0_' + index
+    })], 2)
   }), _vm._v(" "), _c('van-grid-item', {
     attrs: {
       "text": "添加现场情况",
       "icon": "plus",
       "eventid": '1',
-      "mpcomid": '1'
+      "mpcomid": '2'
     },
     on: {
       "click": function($event) {
@@ -366,13 +384,13 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 2)], 1), _vm._v(" "), _c('van-sticky', {
     attrs: {
-      "mpcomid": '5'
+      "mpcomid": '6'
     }
   }, [_c('van-button', {
     attrs: {
       "type": "info",
       "eventid": '3',
-      "mpcomid": '4'
+      "mpcomid": '5'
     },
     on: {
       "click": function () {
@@ -383,11 +401,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "title"
   }, [_vm._v("现场有害生物防治服务报告")]), _vm._v(" "), _c('van-cell-group', {
     attrs: {
-      "mpcomid": '20'
+      "mpcomid": '21'
     }
   }, [_c('van-cell-group', {
     attrs: {
-      "mpcomid": '19'
+      "mpcomid": '20'
     }
   }, [_c('van-field', {
     attrs: {
@@ -397,7 +415,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "客户名称",
       "placeholder": "请输入客户名称",
       "eventid": '4',
-      "mpcomid": '6'
+      "mpcomid": '7'
     },
     on: {
       "change": function($event) {
@@ -418,7 +436,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "required": "",
       "label": "检查日期",
       "placeholder": "请选择检查日期",
-      "mpcomid": '7'
+      "mpcomid": '8'
     }
   })], 1), _vm._v(" "), _c('picker', {
     attrs: {
@@ -434,7 +452,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "required": "",
       "label": "报告日期",
       "placeholder": "请选择报告日期",
-      "mpcomid": '8'
+      "mpcomid": '9'
     }
   })], 1), _vm._v(" "), _c('van-field', {
     attrs: {
@@ -444,26 +462,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "检查人员",
       "placeholder": "请输入检查人员",
       "eventid": '7',
-      "mpcomid": '9'
-    },
-    on: {
-      "change": function($event) {
-        _vm.modelChange($event, 'checkPerson')
-      }
-    }
-  }), _vm._v(" "), _c('van-field', {
-    attrs: {
-      "value": _vm.form.accompanyPerson,
-      "required": "",
-      "clearable": "",
-      "label": "随行人员",
-      "placeholder": "请输入随行人员",
-      "eventid": '8',
       "mpcomid": '10'
     },
     on: {
       "change": function($event) {
-        _vm.modelChange($event, 'accompanyPerson')
+        _vm.modelChange($event, 'checkPerson')
       }
     }
   }), _vm._v(" "), _c('van-field', {
@@ -475,29 +478,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "placeholder": "请输入检查区域",
       "type": "textarea",
       "autosize": _vm.autosize,
-      "eventid": '9',
+      "eventid": '8',
       "mpcomid": '11'
     },
     on: {
       "change": function($event) {
         _vm.modelChange($event, 'checkArea')
-      }
-    }
-  }), _vm._v(" "), _c('van-field', {
-    attrs: {
-      "value": _vm.form.inspectionItem,
-      "required": "",
-      "clearable": "",
-      "label": "检查项目",
-      "placeholder": "请输入检查项目",
-      "type": "textarea",
-      "autosize": _vm.autosize,
-      "eventid": '10',
-      "mpcomid": '12'
-    },
-    on: {
-      "change": function($event) {
-        _vm.modelChange($event, 'inspectionItem')
       }
     }
   }), _vm._v(" "), _c('van-field', {
@@ -509,8 +495,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "placeholder": "请输入整体虫鼠患情况描述",
       "type": "textarea",
       "autosize": _vm.autosize,
-      "eventid": '11',
-      "mpcomid": '13'
+      "eventid": '9',
+      "mpcomid": '12'
     },
     on: {
       "change": function($event) {
@@ -519,72 +505,110 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }), _vm._v(" "), _c('van-field', {
     attrs: {
-      "value": _vm.form,
+      "value": _vm.form.serviceProvider,
       "required": "",
+      "clearable": "",
+      "label": "服务商名称",
+      "placeholder": "请输入服务商名称",
+      "eventid": '10',
+      "mpcomid": '13'
+    },
+    on: {
+      "change": function($event) {
+        _vm.modelChange($event, 'serviceProvider')
+      }
+    }
+  }), _vm._v(" "), _c('van-field', {
+    attrs: {
+      "value": _vm.form.server,
+      "required": "",
+      "clearable": "",
+      "label": "服务人员",
+      "placeholder": "请输入服务人员",
+      "eventid": '11',
+      "mpcomid": '14'
+    },
+    on: {
+      "change": function($event) {
+        _vm.modelChange($event, 'server')
+      }
+    }
+  }), _vm._v(" "), _c('van-field', {
+    attrs: {
+      "value": _vm.form.phone,
+      "required": "",
+      "clearable": "",
+      "label": "联系电话",
+      "placeholder": "请输入联系电话",
+      "eventid": '12',
+      "mpcomid": '15'
+    },
+    on: {
+      "change": function($event) {
+        _vm.modelChange($event, 'phone')
+      }
+    }
+  }), _vm._v(" "), _c('van-field', {
+    attrs: {
+      "value": _vm.form.accompanyPerson,
+      "clearable": "",
+      "label": "随行人员",
+      "placeholder": "请输入随行人员",
+      "eventid": '13',
+      "mpcomid": '16'
+    },
+    on: {
+      "change": function($event) {
+        _vm.modelChange($event, 'accompanyPerson')
+      }
+    }
+  }), _vm._v(" "), _c('van-field', {
+    attrs: {
+      "value": _vm.form.inspectionItem,
+      "clearable": "",
+      "label": "检查项目",
+      "placeholder": "请输入检查项目",
+      "type": "textarea",
+      "autosize": _vm.autosize,
+      "eventid": '14',
+      "mpcomid": '17'
+    },
+    on: {
+      "change": function($event) {
+        _vm.modelChange($event, 'inspectionItem')
+      }
+    }
+  }), _vm._v(" "), _c('van-field', {
+    attrs: {
+      "value": _vm.form.checkMethod,
       "clearable": "",
       "label": "检查方法",
       "placeholder": "请输入检查方法",
       "type": "textarea",
       "autosize": _vm.autosize,
-      "eventid": '12',
-      "mpcomid": '14'
-    },
-    on: {
-      "change": _vm.modelChange
-    }
-  }), _vm._v(" "), _c('van-field', {
-    attrs: {
-      "value": _vm.form,
-      "required": "",
-      "clearable": "",
-      "label": "服务人员",
-      "placeholder": "请输入服务人员",
-      "eventid": '13',
-      "mpcomid": '15'
-    },
-    on: {
-      "change": _vm.modelChange
-    }
-  }), _vm._v(" "), _c('van-field', {
-    attrs: {
-      "value": _vm.form,
-      "required": "",
-      "clearable": "",
-      "label": "联系电话",
-      "placeholder": "请输入联系电话",
-      "eventid": '14',
-      "mpcomid": '16'
-    },
-    on: {
-      "change": _vm.modelChange
-    }
-  }), _vm._v(" "), _c('van-field', {
-    attrs: {
-      "value": _vm.form,
-      "required": "",
-      "clearable": "",
-      "label": "服务商名称",
-      "placeholder": "请输入服务商名称",
       "eventid": '15',
-      "mpcomid": '17'
+      "mpcomid": '18'
     },
     on: {
-      "change": _vm.modelChange
+      "change": function($event) {
+        _vm.modelChange($event, 'checkMethod')
+      }
     }
   }), _vm._v(" "), _c('van-field', {
     attrs: {
-      "value": _vm.form,
-      "required": "",
+      "value": _vm.form.remark,
       "clearable": "",
       "label": "备注",
       "placeholder": "请输入备注",
       "type": "textarea",
       "autosize": _vm.autosize,
       "eventid": '16',
-      "mpcomid": '18'
+      "mpcomid": '19'
     },
     on: {
-      "change": _vm.modelChange
+      "change": function($event) {
+        _vm.modelChange($event, 'remark')
+      }
     }
   })], 1)], 1), _vm._v(" "), _c('div', {
     staticClass: "okbtn"
@@ -593,7 +617,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "primary",
       "size": "large",
       "eventid": '17',
-      "mpcomid": '21'
+      "mpcomid": '22'
     },
     on: {
       "click": _vm.ok
@@ -607,7 +631,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-982d601a", esExports)
+     require("vue-hot-reload-api").rerender("data-v-ee2cf47e", esExports)
   }
 }
 

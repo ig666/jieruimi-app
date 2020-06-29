@@ -1,14 +1,14 @@
-<template name="4995cb7c">
-  <view class="_div data-v-385a067b mine">
-    <view class="_div data-v-385a067b mine-news">
-      <image src="/static/tabs/face.jpg" alt class="_img data-v-385a067b"></image>
-      <view class="_div data-v-385a067b">
-        <view class="_div data-v-385a067b name">{{ name }}</view>
-        <view class="_div data-v-385a067b phone">{{ phone }}</view>
+<template name="3acf7b6a">
+  <view class="_div data-v-3414536d mine">
+    <view class="_div data-v-3414536d mine-news">
+      <image src="/static/tabs/face.jpg" alt class="_img data-v-3414536d"></image>
+      <view class="_div data-v-3414536d">
+        <view class="_div data-v-3414536d name">{{ name }}</view>
+        <view class="_div data-v-3414536d phone">{{ phone }}</view>
       </view>
     </view>
-    <view class="_div data-v-385a067b cells">
-      <van-cell bindtap="handleProxy" title="添加报告" icon="notes-o" is-link data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_van-cell data-v-385a067b"></van-cell>
+    <view class="_div data-v-3414536d cells">
+      <van-cell bindtap="handleProxy" title="添加报告" icon="notes-o" is-link data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_van-cell data-v-3414536d"></van-cell>
     </view>
   </view>
 </template>
