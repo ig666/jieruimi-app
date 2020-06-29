@@ -1,17 +1,17 @@
 
-.detail.data-v-3a4a23aa {
+.detail.data-v-26ffd48e {
   padding-top: 30rpx;
 }
-.detail .okbtn.data-v-3a4a23aa {
+.detail .okbtn.data-v-26ffd48e {
   margin-top: 150rpx;
 }
-.detail .choose-img.data-v-3a4a23aa {
+.detail .choose-img.data-v-26ffd48e {
   display: flex;
   align-items: center;
   padding: 20rpx;
   background: #ffffff;
 }
-.detail .choose-img .label.data-v-3a4a23aa {
+.detail .choose-img .label.data-v-26ffd48e {
   min-width: 180rpx;
   max-width: 180rpx;
   font-size: 28rpx;
