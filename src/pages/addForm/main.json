@@ -1,14 +1,14 @@
 {
   "navigationBarTitleText": "添加报告",
   "usingComponents": {
-    "van-cell": "/static/dist/cell/index",
-    "van-cell-group": "/static/dist/cell-group/index",
-    "van-field": "/static/dist/field/index",
-    "van-sticky": "/static/dist/sticky/index",
-    "van-button": "/static/dist/button/index",
-    "van-popup": "/static/dist/popup/index",
-    "van-grid": "/static/dist/grid/index",
-    "van-grid-item": "/static/dist/grid-item/index",
-    "van-icon": "/static/dist/icon/index"
+    "van-cell": "/static/vant/cell/index",
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-field": "/static/vant/field/index",
+    "van-sticky": "/static/vant/sticky/index",
+    "van-button": "/static/vant/button/index",
+    "van-popup": "/static/vant/popup/index",
+    "van-grid": "/static/vant/grid/index",
+    "van-grid-item": "/static/vant/grid-item/index",
+    "van-icon": "/static/vant/icon/index"
   }
 }

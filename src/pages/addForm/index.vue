@@ -32,8 +32,7 @@
           }
         "
         type="info"
-        >添加发现情况</van-button
-      >
+      >添加发现情况</van-button>
     </van-sticky>
     <!-- 内容 -->
     <div class="title">现场有害生物防治服务报告</div>
@@ -47,7 +46,10 @@
           label="客户名称"
           placeholder="请输入客户名称"
         />
-        <picker mode="date" @change="checkDateChange">
+        <picker
+          mode="date"
+          @change="checkDateChange"
+        >
           <van-field
             :value="form.checkDate"
             required
@@ -55,7 +57,10 @@
             placeholder="请选择检查日期"
           />
         </picker>
-        <picker mode="date" @change="reportDateChange">
+        <picker
+          mode="date"
+          @change="reportDateChange"
+        >
           <van-field
             :value="form.reportDate"
             required
@@ -152,13 +157,18 @@
       </van-cell-group>
     </van-cell-group>
     <div class="okbtn">
-      <van-button @click="ok" type="primary" size="large">生成报告</van-button>
+      <van-button
+        @click="ok"
+        type="primary"
+        size="large"
+      >生成报告</van-button>
     </div>
   </div>
 </template>
 
 <script>
 import store from "../../store/store";
+import { request } from "@/request/request";
 const situations = store.state.situations;
 export default {
   data() {
@@ -194,16 +204,56 @@ export default {
       }
     },
     ok() {
-      for (let item  of this.form.discoverItemList) {
-        console.log(item.pictureUrl[0].url)
+      let arr = []
+      for (let item of this.form.discoverItemList) {
+        arr.push(item.pictureUrl)
+      }
+      this.syncLoad(this.uploadFile, arr).then(() => { request('ReportData',this.form,'POST') }).catch((res) => { wx.showToast({
+        title:'失败图片数组'+JSON.stringify(res),
+        duration:3000,
+        icon:'none',
+      }) })
+    },
+    uploadFile(url) {
+      return new Promise((resolve, reject) => {
         wx.uploadFile({
           url: 'http://120.26.187.170/files', //开发者服务器 url
-          filePath: item.pictureUrl[0].url, //要上传文件资源的路径
+          filePath: url, //要上传文件资源的路径
           name: 'file', //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
           success: res => {
-            console.log(res)
+            resolve(res)
           },
+          fail: (res) => {
+            reject(res)
+          }
         });
+      })
+    },
+    //多张图片顺序同步上传
+    syncLoad(fn, arr, handler) {
+      if (typeof fn !== 'function') throw TypeError('第一个参数必须是function')
+      if (!Array.isArray(arr)) throw TypeError('第二个参数必须是数组')
+      handler = (url, index) => {
+        this.form.discoverItemList[index].pictureUrl = url
+      }
+      const errors = []
+      return load(0)
+      function load(index) {
+        if (index >= arr.length) {
+          return errors.length > 0 ? Promise.reject(errors) : Promise.resolve()
+        }
+        return fn(arr[index])
+          .then(res => {
+            handler(res.data, index)
+          })
+          .catch(err => {
+            console.log(err)
+            errors.push(arr[index])
+            return load(index + 1)
+          })
+          .then(() => {
+            return load(index + 1)
+          })
       }
     },
     checkDateChange(val) {
@@ -215,7 +265,7 @@ export default {
     onClose() {
       this.show = false;
     },
-    checkDetails(item,index) {
+    checkDetails(item, index) {
       if (item === "add") {
         wx.navigateTo({
           url: "/pages/detail/main?type=add",
@@ -225,7 +275,7 @@ export default {
           url: "/pages/detail/main?type=update",
           success: function (res) {
             // 通过eventChannel向被打开页面传送数据
-            res.eventChannel.emit("detailNew", { data: { item,index } });
+            res.eventChannel.emit("detailNew", { data: { item, index } });
           },
         });
       }

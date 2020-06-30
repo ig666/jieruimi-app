@@ -83,9 +83,16 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_get_iterator__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_get_iterator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_get_iterator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_store__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_json_stringify__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_json_stringify__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_store__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__request_request__ = __webpack_require__(118);
+
+
 
 //
 //
@@ -246,9 +253,19 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
-var situations = __WEBPACK_IMPORTED_MODULE_1__store_store__["a" /* default */].state.situations;
+
+var situations = __WEBPACK_IMPORTED_MODULE_3__store_store__["a" /* default */].state.situations;
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
@@ -284,23 +301,18 @@ var situations = __WEBPACK_IMPORTED_MODULE_1__store_store__["a" /* default */].s
       }
     },
     ok: function ok() {
+      var _this = this;
+
+      var arr = [];
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
       var _iteratorError = undefined;
 
       try {
-        for (var _iterator = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_get_iterator___default()(this.form.discoverItemList), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (var _iterator = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator___default()(this.form.discoverItemList), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var item = _step.value;
 
-          console.log(item.pictureUrl[0].url);
-          wx.uploadFile({
-            url: 'http://120.26.187.170/files', //开发者服务器 url
-            filePath: item.pictureUrl[0].url, //要上传文件资源的路径
-            name: 'file', //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
-            success: function success(res) {
-              console.log(res);
-            }
-          });
+          arr.push(item.pictureUrl);
         }
       } catch (err) {
         _didIteratorError = true;
@@ -315,6 +327,58 @@ var situations = __WEBPACK_IMPORTED_MODULE_1__store_store__["a" /* default */].s
             throw _iteratorError;
           }
         }
+      }
+
+      this.syncLoad(this.uploadFile, arr).then(function () {
+        Object(__WEBPACK_IMPORTED_MODULE_4__request_request__["a" /* request */])('ReportData', _this.form, 'POST');
+      }).catch(function (res) {
+        wx.showToast({
+          title: '失败图片数组' + __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_json_stringify___default()(res),
+          duration: 3000,
+          icon: 'none'
+        });
+      });
+    },
+    uploadFile: function uploadFile(url) {
+      return new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
+        wx.uploadFile({
+          url: 'http://120.26.187.170/files', //开发者服务器 url
+          filePath: url, //要上传文件资源的路径
+          name: 'file', //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+          success: function success(res) {
+            resolve(res);
+          },
+          fail: function fail(res) {
+            reject(res);
+          }
+        });
+      });
+    },
+
+    //多张图片顺序同步上传
+    syncLoad: function syncLoad(fn, arr, handler) {
+      var _this2 = this;
+
+      if (typeof fn !== 'function') throw TypeError('第一个参数必须是function');
+      if (!Array.isArray(arr)) throw TypeError('第二个参数必须是数组');
+      handler = function handler(url, index) {
+        _this2.form.discoverItemList[index].pictureUrl = url;
+      };
+      var errors = [];
+      return load(0);
+      function load(index) {
+        if (index >= arr.length) {
+          return errors.length > 0 ? __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.reject(errors) : __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a.resolve();
+        }
+        return fn(arr[index]).then(function (res) {
+          handler(res.data, index);
+        }).catch(function (err) {
+          console.log(err);
+          errors.push(arr[index]);
+          return load(index + 1);
+        }).then(function () {
+          return load(index + 1);
+        });
       }
     },
     checkDateChange: function checkDateChange(val) {

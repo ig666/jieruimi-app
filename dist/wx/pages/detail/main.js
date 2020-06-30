@@ -153,11 +153,60 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
+      show: false,
+      imgUrl: "",
       index: "",
       type: "",
       autosize: { maxHeight: 100, minHeight: 50 },
@@ -166,7 +215,7 @@ if (false) {(function () {
         description: "",
         potentialRisks: "",
         suggest: "",
-        pictureUrl: []
+        pictureUrl: ""
       }
     };
   },
@@ -181,19 +230,52 @@ if (false) {(function () {
 
         _this.situation = data.item;
         _this.index = data.index;
+        _this.imgUrl = _this.situation.pictureUrl;
       });
     } else {
+      this.imgUrl = '';
       this.situation = {
         location: "",
         description: "",
         potentialRisks: "",
         suggest: "",
-        pictureUrl: []
+        pictureUrl: ""
       };
     }
   },
 
   methods: {
+    deleteImg: function deleteImg() {
+      this.imgUrl = '';
+    },
+
+    //选取照片方式
+    choosePhoto: function choosePhoto(type) {
+      var _this2 = this;
+
+      this.show = false;
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        sourceType: type === 'paly' ? ['camera'] : ['album'],
+        success: function success(res) {
+          _this2.imgUrl = res.tempFilePaths[0];
+          _this2.show = false;
+        }
+      });
+    },
+    chooseImg: function chooseImg() {
+      this.show = true;
+    },
+    onClose: function onClose() {
+      this.show = false;
+    },
+    previewImage: function previewImage() {
+      wx.previewImage({
+        current: this.imgUrl,
+        urls: [this.imgUrl] // 需要预览的图片http链接列表
+      });
+    },
     deleteSituation: function deleteSituation() {
       __WEBPACK_IMPORTED_MODULE_0__store_store__["a" /* default */].commit("decrement", this.index);
       wx.navigateBack();
@@ -207,28 +289,8 @@ if (false) {(function () {
         }
       }
     },
-    deleteImg: function deleteImg(_ref2) {
-      var target = _ref2.target;
-
-      this.situation.pictureUrl.splice(target.index, 1);
-    },
-    afterRead: function afterRead(_ref3) {
-      var _this2 = this;
-
-      var target = _ref3.target;
-
-      wx.compressImage({
-        src: target.file.path,
-        success: function success(res) {
-          console.log(res);
-          _this2.situation.pictureUrl.push({
-            url: res.tempFilePath,
-            isImage: true
-          });
-        }
-      });
-    },
     ok: function ok() {
+      this.situation.pictureUrl = this.imgUrl;
       if (this.type === "update") {
         wx.navigateBack();
       } else {
@@ -248,9 +310,53 @@ if (false) {(function () {
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "detail"
-  }, [_c('van-cell-group', {
+  }, [_c('van-popup', {
     attrs: {
-      "mpcomid": '5'
+      "show": _vm.show,
+      "round": "",
+      "position": "bottom",
+      "custom-style": "height: 20%",
+      "custom-class": "chooseimg",
+      "eventid": '3',
+      "mpcomid": '0'
+    },
+    on: {
+      "close": _vm.onClose
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "border-bottom": "1px solid #F5F5F5"
+    },
+    attrs: {
+      "eventid": '0'
+    },
+    on: {
+      "click": function($event) {
+        _vm.choosePhoto('play')
+      }
+    }
+  }, [_vm._v("拍照")]), _vm._v(" "), _c('div', {
+    attrs: {
+      "eventid": '1'
+    },
+    on: {
+      "click": function($event) {
+        _vm.choosePhoto('choose')
+      }
+    }
+  }, [_vm._v("从手机相册选择")]), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "border-top": "20rpx solid #F8F8FA"
+    },
+    attrs: {
+      "eventid": '2'
+    },
+    on: {
+      "click": _vm.onClose
+    }
+  }, [_vm._v("取消")])]), _vm._v(" "), _c('van-cell-group', {
+    attrs: {
+      "mpcomid": '6'
     }
   }, [_c('van-field', {
     attrs: {
@@ -258,8 +364,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "clearable": "",
       "label": "地点位置",
       "placeholder": "请输入地点位置",
-      "eventid": '0',
-      "mpcomid": '0'
+      "eventid": '4',
+      "mpcomid": '1'
     },
     on: {
       "change": function($event) {
@@ -274,8 +380,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "placeholder": "请输入情况描述",
       "type": "textarea",
       "autosize": _vm.autosize,
-      "eventid": '1',
-      "mpcomid": '1'
+      "eventid": '5',
+      "mpcomid": '2'
     },
     on: {
       "change": function($event) {
@@ -290,8 +396,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "placeholder": "请输入风险隐患",
       "type": "textarea",
       "autosize": _vm.autosize,
-      "eventid": '2',
-      "mpcomid": '2'
+      "eventid": '6',
+      "mpcomid": '3'
     },
     on: {
       "change": function($event) {
@@ -306,8 +412,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "placeholder": "请输入建议措施",
       "type": "textarea",
       "autosize": _vm.autosize,
-      "eventid": '3',
-      "mpcomid": '3'
+      "eventid": '7',
+      "mpcomid": '4'
     },
     on: {
       "change": function($event) {
@@ -322,8 +428,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "placeholder": "请输入备注",
       "type": "textarea",
       "autosize": _vm.autosize,
-      "eventid": '4',
-      "mpcomid": '4'
+      "eventid": '8',
+      "mpcomid": '5'
     },
     on: {
       "change": function($event) {
@@ -334,18 +440,42 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "choose-img"
   }, [_c('div', {
     staticClass: "label"
-  }, [_vm._v("选择图片")]), _vm._v(" "), _c('van-uploader', {
+  }, [_vm._v("选择图片")]), _vm._v(" "), _c('div', {
+    staticClass: "photo"
+  }, [(!_vm.imgUrl) ? _c('van-button', {
     attrs: {
-      "max-count": "1",
-      "file-list": _vm.situation.pictureUrl,
-      "eventid": '5',
-      "mpcomid": '6'
+      "custom-style": "height:200rpx",
+      "block": "",
+      "plain": "",
+      "icon": "photograph",
+      "type": "info",
+      "eventid": '10',
+      "mpcomid": '7'
     },
     on: {
-      "afterRead": _vm.afterRead,
-      "delete": _vm.deleteImg
+      "click": _vm.chooseImg
     }
-  })], 1), _vm._v(" "), _c('div', {
+  }) : _c('img', {
+    staticClass: "custom-image",
+    attrs: {
+      "src": _vm.imgUrl,
+      "alt": "",
+      "eventid": '9'
+    },
+    on: {
+      "click": _vm.previewImage
+    }
+  }), _vm._v(" "), (_vm.imgUrl) ? _c('van-icon', {
+    attrs: {
+      "color": "#F4778E",
+      "name": "clear",
+      "eventid": '11',
+      "mpcomid": '8'
+    },
+    on: {
+      "click": _vm.deleteImg
+    }
+  }) : _vm._e()], 1)]), _vm._v(" "), _c('div', {
     staticClass: "okbtn"
   }, [_c('div', {
     staticClass: "btn"
@@ -353,8 +483,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "size": "large",
       "type": "primary",
-      "eventid": '6',
-      "mpcomid": '7'
+      "eventid": '12',
+      "mpcomid": '9'
     },
     on: {
       "click": _vm.ok
@@ -368,8 +498,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "size": "large",
       "type": "danger",
-      "eventid": '7',
-      "mpcomid": '8'
+      "eventid": '13',
+      "mpcomid": '10'
     },
     on: {
       "click": _vm.deleteSituation

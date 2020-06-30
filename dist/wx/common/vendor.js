@@ -9716,7 +9716,56 @@ $export($export.S, 'Promise', { 'try': function (callbackfn) {
 
 
 /***/ }),
-/* 118 */,
+/* 118 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return request; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
+
+var request = function request(url, data) {
+  var method = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "GET";
+
+  return new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
+    wx.showLoading({
+      title: "加载中"
+    });
+    wx.request({
+      header: {
+        Authorization: "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTM1NTIyMjYsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsibnVsbCIsIlJPTEVfVVNFUiJdLCJqdGkiOiIxMzRhYmQ0Zi02NTlhLTQ4ZjctODE2Ny04MDQ4MzBhYzM5NzkiLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.V_BGKP47npzT06en2Lg3NCnzf0k-e8QZKuDKLMruQAk"
+      },
+      url: "http://120.26.187.170/" + url, //开发者服务器接口地址",
+      data: data, //请求的参数",
+      method: method,
+      dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
+      success: function success(res) {
+        console.log(res);
+        wx.hideLoading();
+        if (res.statusCode !== 200) {
+          wx.showToast({
+            title: res.data.error,
+            icon: 'none',
+            duration: 3000
+          });
+        } else {
+          resolve(res.data);
+        }
+      },
+      fail: function fail(res) {
+        wx.hideLoading();
+        reject(res);
+        wx.showToast({
+          title: "网络错误",
+          icon: 'none',
+          duration: 3000
+        });
+      }
+    });
+  });
+};
+
+/***/ }),
 /* 119 */,
 /* 120 */
 /***/ (function(module, exports) {
@@ -10029,6 +10078,30 @@ function applyToTag (styleElement, obj) {
     styleElement.appendChild(document.createTextNode(css))
   }
 }
+
+
+/***/ }),
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(130), __esModule: true };
+
+/***/ }),
+/* 130 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var core = __webpack_require__(3);
+var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
+module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
+  return $JSON.stringify.apply($JSON, arguments);
+};
 
 
 /***/ })
