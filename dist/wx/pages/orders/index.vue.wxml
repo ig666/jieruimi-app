@@ -1,3 +1,5 @@
 <template name="10ac4614">
-  <view class="_div data-v-2198374d orders">报告</view>
+  <view class="_div data-v-2198374d orders">
+    <scroll-view style="height: 100%;" class="_scroll-view data-v-2198374d"></scroll-view>
+  </view>
 </template>

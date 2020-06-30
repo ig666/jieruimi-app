@@ -1,5 +1,7 @@
 <template>
-  <div class="orders">报告</div>
+  <div class="orders">
+    <scroll-view style="height: 100%;"> </scroll-view>
+  </div>
 </template>
 
 <script>
@@ -20,5 +22,6 @@ export default {
 
 <style lang="less" scoped>
 .orders {
+  height: 100%;
 }
 </style>
