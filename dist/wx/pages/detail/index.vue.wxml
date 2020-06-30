@@ -1,22 +1,22 @@
-<template name="48d7b700">
-  <view class="_div data-v-26ffd48e detail">
-    <van-cell-group class="_van-cell-group data-v-26ffd48e">
-      <van-field value="{{situation.location}}" bindchange="handleProxy" clearable label="地点位置" placeholder="请输入地点位置" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_van-field data-v-26ffd48e"></van-field>
-      <van-field value="{{situation.description}}" bindchange="handleProxy" clearable label="情况描述" placeholder="请输入情况描述" type="textarea" autosize="{{autosize}}" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_van-field data-v-26ffd48e"></van-field>
-      <van-field value="{{situation.potentialRisks}}" bindchange="handleProxy" clearable label="风险隐患" placeholder="请输入风险隐患" type="textarea" autosize="{{autosize}}" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_van-field data-v-26ffd48e"></van-field>
-      <van-field value="{{situation.suggest}}" bindchange="handleProxy" clearable label="建议措施" placeholder="请输入建议措施" type="textarea" autosize="{{autosize}}" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_van-field data-v-26ffd48e"></van-field>
-      <van-field value="{{situation.remark}}" bindchange="handleProxy" clearable label="备注" placeholder="请输入备注" type="textarea" autosize="{{autosize}}" data-eventid="{{'4'}}" data-comkey="{{$k}}" class="_van-field data-v-26ffd48e"></van-field>
+<template name="001e9d89">
+  <view class="_div data-v-3a4a23aa detail">
+    <van-cell-group class="_van-cell-group data-v-3a4a23aa">
+      <van-field value="{{situation.location}}" bindchange="handleProxy" clearable label="地点位置" placeholder="请输入地点位置" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_van-field data-v-3a4a23aa"></van-field>
+      <van-field value="{{situation.description}}" bindchange="handleProxy" clearable label="情况描述" placeholder="请输入情况描述" type="textarea" autosize="{{autosize}}" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_van-field data-v-3a4a23aa"></van-field>
+      <van-field value="{{situation.potentialRisks}}" bindchange="handleProxy" clearable label="风险隐患" placeholder="请输入风险隐患" type="textarea" autosize="{{autosize}}" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_van-field data-v-3a4a23aa"></van-field>
+      <van-field value="{{situation.suggest}}" bindchange="handleProxy" clearable label="建议措施" placeholder="请输入建议措施" type="textarea" autosize="{{autosize}}" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_van-field data-v-3a4a23aa"></van-field>
+      <van-field value="{{situation.remark}}" bindchange="handleProxy" clearable label="备注" placeholder="请输入备注" type="textarea" autosize="{{autosize}}" data-eventid="{{'4'}}" data-comkey="{{$k}}" class="_van-field data-v-3a4a23aa"></van-field>
     </van-cell-group>
-    <view class="_div data-v-26ffd48e choose-img">
-      <view class="_div data-v-26ffd48e label">选择图片</view>
-      <van-uploader max-count="1" file-list="{{situation.pictureUrl}}" bindafterRead="handleProxy" binddelete="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}" class="_van-uploader data-v-26ffd48e"></van-uploader>
+    <view class="_div data-v-3a4a23aa choose-img">
+      <view class="_div data-v-3a4a23aa label">选择图片</view>
+      <van-uploader max-count="1" file-list="{{situation.pictureUrl}}" bindafterRead="handleProxy" binddelete="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}" class="_van-uploader data-v-3a4a23aa"></van-uploader>
     </view>
-    <view class="_div data-v-26ffd48e okbtn">
-      <view class="_div data-v-26ffd48e btn">
-        <van-button size="large" type="primary" bindtap="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}" class="_van-button data-v-26ffd48e">确定</van-button>
+    <view class="_div data-v-3a4a23aa okbtn">
+      <view class="_div data-v-3a4a23aa btn">
+        <van-button size="large" type="primary" bindtap="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}" class="_van-button data-v-3a4a23aa">确定</van-button>
       </view>
-      <view class="_div data-v-26ffd48e btn" style="margin-left: 40rpx;" wx:if="{{type === 'update'}}">
-        <van-button size="large" type="danger" bindtap="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}" class="_van-button data-v-26ffd48e">删除</van-button>
+      <view class="_div data-v-3a4a23aa btn" style="margin-left: 40rpx;" wx:if="{{type === 'update'}}">
+        <van-button size="large" type="danger" bindtap="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}" class="_van-button data-v-3a4a23aa">删除</van-button>
       </view>
     </view>
   </view>

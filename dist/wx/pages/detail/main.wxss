@@ -1,22 +1,22 @@
 
-.detail.data-v-26ffd48e {
+.detail.data-v-3a4a23aa {
   padding-top: 30rpx;
 }
-.detail .okbtn.data-v-26ffd48e {
+.detail .okbtn.data-v-3a4a23aa {
   margin-top: 150rpx;
   display: flex;
   justify-content: center;
 }
-.detail .okbtn .btn.data-v-26ffd48e {
+.detail .okbtn .btn.data-v-3a4a23aa {
   width: 200rpx;
 }
-.detail .choose-img.data-v-26ffd48e {
+.detail .choose-img.data-v-3a4a23aa {
   display: flex;
   align-items: center;
   padding: 20rpx;
   background: #ffffff;
 }
-.detail .choose-img .label.data-v-26ffd48e {
+.detail .choose-img .label.data-v-3a4a23aa {
   min-width: 180rpx;
   max-width: 180rpx;
   font-size: 28rpx;

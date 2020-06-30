@@ -1,8 +1,8 @@
 
-.form.data-v-982d601a {
+.form.data-v-ee2cf47e {
   padding-bottom: 60rpx;
 }
-.form .title.data-v-982d601a {
+.form .title.data-v-ee2cf47e {
   padding: 30rpx 0rpx;
   text-align: center;
   font-size: 34rpx;
@@ -11,6 +11,6 @@
   margin-top: 20rpx;
   margin-bottom: 20rpx;
 }
-.form .okbtn.data-v-982d601a {
+.form .okbtn.data-v-ee2cf47e {
   margin-top: 30rpx;
 }
