@@ -1,5 +1,24 @@
 <template>
   <div class="detail">
+    <!-- 弹出层 -->
+    <van-popup
+      :show="show"
+      round
+      position="bottom"
+      custom-style="height: 20%"
+      @close="onClose"
+      custom-class="chooseimg"
+    >
+      <div
+        style="border-bottom: 1px solid #F5F5F5;"
+        @click="choosePhoto('play')"
+      >拍照</div>
+      <div @click="choosePhoto('choose')">从手机相册选择</div>
+      <div
+        style="border-top:20rpx solid #F8F8FA;"
+        @click="onClose"
+      >取消</div>
+    </van-popup>
     <van-cell-group>
       <van-field
         :value="situation.location"
@@ -47,21 +66,49 @@
     </van-cell-group>
     <div class="choose-img">
       <div class="label">选择图片</div>
-      <van-uploader
-        max-count="1"
-        :file-list="situation.pictureUrl"
-        @afterRead="afterRead"
-        @delete="deleteImg"
-      />
+      <div class="photo">
+        <van-button
+          v-if="!imgUrl"
+          custom-style='height:200rpx'
+          block
+          plain
+          @click="chooseImg"
+          icon="photograph"
+          type="info"
+        />
+        <img
+          class="custom-image"
+          @click="previewImage"
+          v-else
+          :src="imgUrl"
+          alt=""
+        >
+        <van-icon
+        @click="deleteImg"
+          v-if='imgUrl'
+          color="#F4778E"
+          name="clear"
+        />
+      </div>
     </div>
     <div class="okbtn">
       <div class="btn">
-        <van-button size="large" type="primary" @click="ok">确定</van-button>
+        <van-button
+          size="large"
+          type="primary"
+          @click="ok"
+        >确定</van-button>
       </div>
-      <div class="btn" style="margin-left: 40rpx;" v-if="type === 'update'">
-        <van-button size="large" type="danger" @click="deleteSituation"
-          >删除</van-button
-        >
+      <div
+        class="btn"
+        style="margin-left: 40rpx;"
+        v-if="type === 'update'"
+      >
+        <van-button
+          size="large"
+          type="danger"
+          @click="deleteSituation"
+        >删除</van-button>
       </div>
     </div>
   </div>
@@ -72,6 +119,8 @@ import store from "../../store/store";
 export default {
   data() {
     return {
+      show: false,
+      imgUrl: "",
       index: "",
       type: "",
       autosize: { maxHeight: 100, minHeight: 50 },
@@ -80,7 +129,7 @@ export default {
         description: "",
         potentialRisks: "",
         suggest: "",
-        pictureUrl: [],
+        pictureUrl: "",
       },
     };
   },
@@ -91,18 +140,48 @@ export default {
       eventChannel.on("detailNew", ({ data }) => {
         this.situation = data.item;
         this.index = data.index;
+        this.imgUrl=this.situation.pictureUrl
       });
     } else {
+      this.imgUrl=''
       this.situation = {
         location: "",
         description: "",
         potentialRisks: "",
         suggest: "",
-        pictureUrl: [],
+        pictureUrl: "",
       };
     }
   },
   methods: {
+    deleteImg(){
+      this.imgUrl=''
+    },
+    //选取照片方式
+    choosePhoto(type) {
+      this.show = false
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        sourceType: type === 'paly' ? ['camera'] : ['album'],
+        success: (res) => {
+          this.imgUrl = res.tempFilePaths[0]
+          this.show = false
+        }
+      })
+    },
+    chooseImg() {
+      this.show = true
+    },
+    onClose() {
+      this.show = false
+    },
+    previewImage() {
+      wx.previewImage({
+        current: this.imgUrl,
+        urls: [this.imgUrl] // 需要预览的图片http链接列表
+      })
+    },
     deleteSituation() {
       store.commit("decrement", this.index);
       wx.navigateBack();
@@ -115,22 +194,8 @@ export default {
         }
       }
     },
-    deleteImg({ target }) {
-      this.situation.pictureUrl.splice(target.index, 1);
-    },
-    afterRead({ target }) {
-      wx.compressImage({
-        src: target.file.path,
-        success: (res) => {
-          console.log(res)
-          this.situation.pictureUrl.push({
-            url: res.tempFilePath,
-            isImage: true,
-          });
-        },
-      });
-    },
     ok() {
+      this.situation.pictureUrl=this.imgUrl
       if (this.type === "update") {
         wx.navigateBack();
       } else {
@@ -145,6 +210,14 @@ export default {
 <style lang="less" scoped>
 .detail {
   padding-top: 30rpx;
+  .chooseimg {
+    div {
+      text-align: center;
+      padding: 20rpx;
+      font-size: 28rpx;
+      background-color: #ffffff;
+    }
+  }
   .okbtn {
     margin-top: 150rpx;
     display: flex;
@@ -158,6 +231,21 @@ export default {
     align-items: center;
     padding: 20rpx;
     background: #ffffff;
+    .photo {
+      min-width: 200rpx;
+      min-height: 200rpx;
+      position: relative;
+      ._van-icon {
+        position: absolute;
+        top: -10rpx;
+        right: -12rpx;
+        z-index: 10;
+      }
+      .custom-image {
+        width: 200rpx;
+        height: 200rpx;
+      }
+    }
     .label {
       min-width: 180rpx;
       max-width: 180rpx;

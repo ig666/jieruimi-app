@@ -2,6 +2,12 @@
 .detail.data-v-3a4a23aa {
   padding-top: 30rpx;
 }
+.detail .chooseimg ._div.data-v-3a4a23aa {
+  text-align: center;
+  padding: 20rpx;
+  font-size: 28rpx;
+  background-color: #ffffff;
+}
 .detail .okbtn.data-v-3a4a23aa {
   margin-top: 150rpx;
   display: flex;
@@ -15,6 +21,21 @@
   align-items: center;
   padding: 20rpx;
   background: #ffffff;
+}
+.detail .choose-img .photo.data-v-3a4a23aa {
+  min-width: 200rpx;
+  min-height: 200rpx;
+  position: relative;
+}
+.detail .choose-img .photo ._van-icon.data-v-3a4a23aa {
+  position: absolute;
+  top: -10rpx;
+  right: -12rpx;
+  z-index: 10;
+}
+.detail .choose-img .photo .custom-image.data-v-3a4a23aa {
+  width: 200rpx;
+  height: 200rpx;
 }
 .detail .choose-img .label.data-v-3a4a23aa {
   min-width: 180rpx;

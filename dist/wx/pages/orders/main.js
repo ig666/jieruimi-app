@@ -2,54 +2,6 @@ require("../../common/manifest.js")
 require("../../common/vendor.js")
 global.webpackJsonpMpvue([1],{
 
-/***/ 118:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export request */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
-
-var request = function request(url, data) {
-  var method = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "GET";
-
-  return new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
-    wx.showLoading({
-      title: "加载中"
-    });
-    wx.request({
-      url: "http://120.26.187.170/" + url, //开发者服务器接口地址",
-      data: data, //请求的参数",
-      method: method,
-      dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
-      success: function success(res) {
-        console.log(res);
-        wx.hideLoading();
-        if (res.statusCode !== 200) {
-          wx.showToast({
-            title: res.data.error,
-            icon: 'none',
-            duration: 3000
-          });
-        } else {
-          resolve(res.data);
-        }
-      },
-      fail: function fail(res) {
-        wx.hideLoading();
-        reject(res);
-        wx.showToast({
-          title: "网络错误",
-          icon: 'none',
-          duration: 3000
-        });
-      }
-    });
-  });
-};
-
-/***/ }),
-
 /***/ 119:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

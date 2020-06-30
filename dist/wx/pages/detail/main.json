@@ -9,6 +9,7 @@
     "van-popup": "/static/vant/popup/index",
     "van-grid": "/static/vant/grid/index",
     "van-grid-item": "/static/vant/grid-item/index",
-    "van-uploader": "/static/vant/uploader/index"
+    "van-uploader": "/static/vant/uploader/index",
+    "van-icon": "/static/vant/icon/index"
   }
 }

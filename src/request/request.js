@@ -4,6 +4,9 @@ export  let request = (url, data, method = "GET") => {
       title: "加载中",
     });
     wx.request({
+      header:{
+        Authorization:"bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTM1NTIyMjYsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsibnVsbCIsIlJPTEVfVVNFUiJdLCJqdGkiOiIxMzRhYmQ0Zi02NTlhLTQ4ZjctODE2Ny04MDQ4MzBhYzM5NzkiLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.V_BGKP47npzT06en2Lg3NCnzf0k-e8QZKuDKLMruQAk"
+      },
       url: "http://120.26.187.170/" + url, //开发者服务器接口地址",
       data: data, //请求的参数",
       method: method,
