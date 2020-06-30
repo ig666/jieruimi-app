@@ -2,7 +2,7 @@
   "navigationBarTitleText": "我的",
   "navigationBarBackgroundColor": "#FFD161",
   "usingComponents": {
-    "van-cell": "/static/dist/cell/index",
-  "van-cell-group": "/static/dist/cell-group/index"
+    "van-cell": "/static/vant/cell/index",
+  "van-cell-group": "/static/vant/cell-group/index"
   }
 }
