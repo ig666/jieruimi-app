@@ -1,3 +1,8 @@
 {
-  "navigationBarTitleText": "查看报告"
+  "navigationBarTitleText": "查看报告",
+  "usingComponents": {
+    "van-swipe-cell": "/static/vant/swipe-cell/index",
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-cell": "/static/vant/cell/index"
+  }
 }

@@ -94,6 +94,8 @@ if (false) {(function () {
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -133,7 +135,11 @@ if (false) {(function () {
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "orders"
-  }, [_vm._v("报告")])
+  }, [_c('scroll-view', {
+    staticStyle: {
+      "height": "100%"
+    }
+  })], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
