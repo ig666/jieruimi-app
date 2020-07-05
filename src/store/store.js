@@ -16,6 +16,10 @@ const store = new Vuex.Store({
       console.log('index',index)
       const obj = state
       obj.situations.splice(index,1)
+    },
+    clerament:(state,index)=>{
+      const obj = state
+      obj.situations.splice(0,obj.situations.length);
     }
   }
 })

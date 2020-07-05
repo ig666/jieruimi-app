@@ -11,9 +11,9 @@
     >
       <div
         style="border-bottom: 1px solid #F5F5F5;"
-        @click="choosePhoto('play')"
+        @click="choosePhoto('camera')"
       >拍照</div>
-      <div @click="choosePhoto('choose')">从手机相册选择</div>
+      <div @click="choosePhoto('album')">从手机相册选择</div>
       <div
         style="border-top:20rpx solid #F8F8FA;"
         @click="onClose"
@@ -163,7 +163,7 @@ export default {
       wx.chooseImage({
         count: 1,
         sizeType: ['compressed'],
-        sourceType: type === 'paly' ? ['camera'] : ['album'],
+        sourceType: [type],
         success: (res) => {
           this.imgUrl = res.tempFilePaths[0]
           this.show = false

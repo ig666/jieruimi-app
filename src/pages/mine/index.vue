@@ -1,7 +1,7 @@
 <template>
   <div class="mine">
     <div class="mine-news">
-      <img src="/static/tabs/face.jpg" alt="" />
+      <img src="/static/images/boy.png" alt="" />
       <div>
         <div class="name">{{ name }}</div>
         <div class="phone">{{ phone }}</div>
@@ -9,11 +9,13 @@
     </div>
     <div class="cells">
       <van-cell @click="addForm" title="添加报告" icon="notes-o" is-link />
+      <van-cell @click="addLogo" title="更换LOGO" icon="like-o" is-link />
     </div>
   </div>
 </template>
 
 <script>
+import store from "../../store/store";
 export default {
   data() {
     return {
@@ -22,8 +24,22 @@ export default {
     };
   },
   methods: {
-    addForm(){
-      wx.navigateTo({ url: '/pages/addForm/main' });
+    addForm() {
+      wx.navigateTo({ url: "/pages/addForm/main" });
+    },
+    addLogo(){
+      wx.navigateTo({ url: "/pages/addLogo/main" });
+    }
+  },
+  onShow(){
+    store.commit('clerament')
+  },
+  onLoad() {
+    let token = wx.getStorageSync("token");
+    if (!token) {
+      wx.redirectTo({
+        url: "/pages/login/main",
+      });
     }
   },
 };

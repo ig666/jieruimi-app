@@ -1,15 +1,15 @@
 require("../../common/manifest.js")
 require("../../common/vendor.js")
-global.webpackJsonpMpvue([6],{
+global.webpackJsonpMpvue([8],{
 
-/***/ 50:
+/***/ 52:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(53);
 
 
 
@@ -18,18 +18,18 @@ app.$mount();
 
 /***/ }),
 
-/***/ 51:
+/***/ 53:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_982d601a_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_982d601a_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_fileExt_template_wxml_script_js_style_wxss_platform_wx_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(96);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(52)
+  __webpack_require__(54)
 }
-var normalizeComponent = __webpack_require__(5)
+var normalizeComponent = __webpack_require__(3)
 /* script */
 
 /* template */
@@ -72,34 +72,35 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 52:
+/***/ 54:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 53:
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_get_iterator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_json_stringify__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_json_stringify__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_json_stringify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_store__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__request_request__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store_store__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__request_request__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__static_vant_notify_notify__ = __webpack_require__(47);
 
 
 
-//
-//
-//
-//
-//
-//
+
+
 //
 //
 //
@@ -265,7 +266,8 @@ if (false) {(function () {
 
 
 
-var situations = __WEBPACK_IMPORTED_MODULE_3__store_store__["a" /* default */].state.situations;
+
+var situations = __WEBPACK_IMPORTED_MODULE_5__store_store__["a" /* default */].state.situations;
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
@@ -292,6 +294,40 @@ var situations = __WEBPACK_IMPORTED_MODULE_3__store_store__["a" /* default */].s
   },
 
   methods: {
+    checkData: function checkData() {
+      var phone = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/;
+      if (!this.form.name) {
+        Object(__WEBPACK_IMPORTED_MODULE_7__static_vant_notify_notify__["a" /* default */])({ type: "warning", message: "请填写客户名称" });
+        return false;
+      } else if (!this.form.checkDate) {
+        Object(__WEBPACK_IMPORTED_MODULE_7__static_vant_notify_notify__["a" /* default */])({ type: "warning", message: "请选择检查日期" });
+        return false;
+      } else if (!this.form.reportDate) {
+        Object(__WEBPACK_IMPORTED_MODULE_7__static_vant_notify_notify__["a" /* default */])({ type: "warning", message: "请选择报告日期" });
+        return false;
+      } else if (!this.form.checkPerson) {
+        Object(__WEBPACK_IMPORTED_MODULE_7__static_vant_notify_notify__["a" /* default */])({ type: "warning", message: "请填写检查人员" });
+        return false;
+      } else if (!this.form.checkArea) {
+        Object(__WEBPACK_IMPORTED_MODULE_7__static_vant_notify_notify__["a" /* default */])({ type: "warning", message: "请填写检查区域" });
+        return false;
+      } else if (!this.form.overallDescription) {
+        Object(__WEBPACK_IMPORTED_MODULE_7__static_vant_notify_notify__["a" /* default */])({ type: "warning", message: "请填写整体虫鼠患情况描述" });
+        return false;
+      } else if (!this.form.serviceProvider) {
+        Object(__WEBPACK_IMPORTED_MODULE_7__static_vant_notify_notify__["a" /* default */])({ type: "warning", message: "请填写服务商名称" });
+        return false;
+      } else if (!this.form.server) {
+        Object(__WEBPACK_IMPORTED_MODULE_7__static_vant_notify_notify__["a" /* default */])({ type: "warning", message: "请填写服务人员" });
+        return false;
+      } else if (!phone.test(this.form.phone)) {
+        Object(__WEBPACK_IMPORTED_MODULE_7__static_vant_notify_notify__["a" /* default */])({ type: "warning", message: "请填写正确手机号" });
+        return false;
+      } else {
+        return true;
+      }
+    },
+
     //非受控组件值绑定
     modelChange: function modelChange(val, key) {
       for (var item in this.form) {
@@ -303,6 +339,9 @@ var situations = __WEBPACK_IMPORTED_MODULE_3__store_store__["a" /* default */].s
     ok: function ok() {
       var _this = this;
 
+      if (!this.checkData()) {
+        return;
+      }
       var arr = [];
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
@@ -329,22 +368,45 @@ var situations = __WEBPACK_IMPORTED_MODULE_3__store_store__["a" /* default */].s
         }
       }
 
-      this.syncLoad(this.uploadFile, arr).then(function () {
-        Object(__WEBPACK_IMPORTED_MODULE_4__request_request__["a" /* request */])('ReportData', _this.form, 'POST');
-      }).catch(function (res) {
+      this.syncLoad(this.uploadFile, arr).then(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var res;
+        return __WEBPACK_IMPORTED_MODULE_3_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return Object(__WEBPACK_IMPORTED_MODULE_6__request_request__["a" /* request */])("ReportData", _this.form, "POST");
+
+              case 2:
+                res = _context.sent;
+
+                if (res.code === 0) {
+                  __WEBPACK_IMPORTED_MODULE_5__store_store__["a" /* default */].commit('clerament');
+                  wx.switchTab({
+                    url: "/pages/orders/main"
+                  });
+                }
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, _this);
+      }))).catch(function (res) {
         wx.showToast({
-          title: '失败图片数组' + __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_json_stringify___default()(res),
+          title: "失败图片数组" + __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_json_stringify___default()(res),
           duration: 3000,
-          icon: 'none'
+          icon: "none"
         });
       });
     },
     uploadFile: function uploadFile(url) {
       return new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
         wx.uploadFile({
-          url: 'http://120.26.187.170/files', //开发者服务器 url
+          url: "http://120.26.187.170/files", //开发者服务器 url
           filePath: url, //要上传文件资源的路径
-          name: 'file', //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+          name: "file", //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
           success: function success(res) {
             resolve(res);
           },
@@ -359,8 +421,8 @@ var situations = __WEBPACK_IMPORTED_MODULE_3__store_store__["a" /* default */].s
     syncLoad: function syncLoad(fn, arr, handler) {
       var _this2 = this;
 
-      if (typeof fn !== 'function') throw TypeError('第一个参数必须是function');
-      if (!Array.isArray(arr)) throw TypeError('第二个参数必须是数组');
+      if (typeof fn !== "function") throw TypeError("第一个参数必须是function");
+      if (!Array.isArray(arr)) throw TypeError("第二个参数必须是数组");
       handler = function handler(url, index) {
         _this2.form.discoverItemList[index].pictureUrl = url;
       };
@@ -404,26 +466,44 @@ var situations = __WEBPACK_IMPORTED_MODULE_3__store_store__["a" /* default */].s
           }
         });
       }
+    },
+
+    //重置
+    reset: function reset() {
+      for (var key in this.form) {
+        console.log(key);
+        if (key !== "discoverItemList") {
+          this.form[key] = "";
+        }
+      }
     }
+  },
+  onLoad: function onLoad() {
+    this.reset();
   }
 });
 
 /***/ }),
 
-/***/ 91:
+/***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form"
-  }, [_c('van-popup', {
+  }, [_c('van-notify', {
+    attrs: {
+      "id": "van-notify",
+      "mpcomid": '0'
+    }
+  }), _vm._v(" "), _c('van-popup', {
     attrs: {
       "show": _vm.show,
       "position": "top",
       "custom-style": "height: 40%;width:100%",
       "eventid": '2',
-      "mpcomid": '3'
+      "mpcomid": '4'
     },
     on: {
       "close": _vm.onClose
@@ -431,7 +511,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('van-grid', {
     attrs: {
       "column-num": "3",
-      "mpcomid": '2'
+      "mpcomid": '3'
     }
   }, [_vm._l((_vm.form.discoverItemList), function(item, index) {
     return _c('van-grid-item', {
@@ -440,7 +520,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "icon": "todo-list",
         "text": item.location,
         "eventid": '0_' + index,
-        "mpcomid": '0_' + index
+        "mpcomid": '1_' + index
       },
       on: {
         "click": function($event) {
@@ -453,7 +533,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "text": "添加现场情况",
       "icon": "plus",
       "eventid": '1',
-      "mpcomid": '1'
+      "mpcomid": '2'
     },
     on: {
       "click": function($event) {
@@ -462,13 +542,13 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 2)], 1), _vm._v(" "), _c('van-sticky', {
     attrs: {
-      "mpcomid": '5'
+      "mpcomid": '6'
     }
   }, [_c('van-button', {
     attrs: {
       "type": "info",
       "eventid": '3',
-      "mpcomid": '4'
+      "mpcomid": '5'
     },
     on: {
       "click": function () {
@@ -479,11 +559,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "title"
   }, [_vm._v("现场有害生物防治服务报告")]), _vm._v(" "), _c('van-cell-group', {
     attrs: {
-      "mpcomid": '20'
+      "mpcomid": '21'
     }
   }, [_c('van-cell-group', {
     attrs: {
-      "mpcomid": '19'
+      "mpcomid": '20'
     }
   }, [_c('van-field', {
     attrs: {
@@ -493,7 +573,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "客户名称",
       "placeholder": "请输入客户名称",
       "eventid": '4',
-      "mpcomid": '6'
+      "mpcomid": '7'
     },
     on: {
       "change": function($event) {
@@ -510,11 +590,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('van-field', {
     attrs: {
+      "readonly": "",
       "value": _vm.form.checkDate,
       "required": "",
       "label": "检查日期",
       "placeholder": "请选择检查日期",
-      "mpcomid": '7'
+      "mpcomid": '8'
     }
   })], 1), _vm._v(" "), _c('picker', {
     attrs: {
@@ -526,11 +607,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_c('van-field', {
     attrs: {
+      "readonly": "",
       "value": _vm.form.reportDate,
       "required": "",
       "label": "报告日期",
       "placeholder": "请选择报告日期",
-      "mpcomid": '8'
+      "mpcomid": '9'
     }
   })], 1), _vm._v(" "), _c('van-field', {
     attrs: {
@@ -540,7 +622,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "检查人员",
       "placeholder": "请输入检查人员",
       "eventid": '7',
-      "mpcomid": '9'
+      "mpcomid": '10'
     },
     on: {
       "change": function($event) {
@@ -557,7 +639,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "textarea",
       "autosize": _vm.autosize,
       "eventid": '8',
-      "mpcomid": '10'
+      "mpcomid": '11'
     },
     on: {
       "change": function($event) {
@@ -574,7 +656,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "textarea",
       "autosize": _vm.autosize,
       "eventid": '9',
-      "mpcomid": '11'
+      "mpcomid": '12'
     },
     on: {
       "change": function($event) {
@@ -589,7 +671,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "服务商名称",
       "placeholder": "请输入服务商名称",
       "eventid": '10',
-      "mpcomid": '12'
+      "mpcomid": '13'
     },
     on: {
       "change": function($event) {
@@ -604,7 +686,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "服务人员",
       "placeholder": "请输入服务人员",
       "eventid": '11',
-      "mpcomid": '13'
+      "mpcomid": '14'
     },
     on: {
       "change": function($event) {
@@ -619,7 +701,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "联系电话",
       "placeholder": "请输入联系电话",
       "eventid": '12',
-      "mpcomid": '14'
+      "mpcomid": '15'
     },
     on: {
       "change": function($event) {
@@ -633,7 +715,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "label": "随行人员",
       "placeholder": "请输入随行人员",
       "eventid": '13',
-      "mpcomid": '15'
+      "mpcomid": '16'
     },
     on: {
       "change": function($event) {
@@ -649,7 +731,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "textarea",
       "autosize": _vm.autosize,
       "eventid": '14',
-      "mpcomid": '16'
+      "mpcomid": '17'
     },
     on: {
       "change": function($event) {
@@ -665,7 +747,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "textarea",
       "autosize": _vm.autosize,
       "eventid": '15',
-      "mpcomid": '17'
+      "mpcomid": '18'
     },
     on: {
       "change": function($event) {
@@ -681,7 +763,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "type": "textarea",
       "autosize": _vm.autosize,
       "eventid": '16',
-      "mpcomid": '18'
+      "mpcomid": '19'
     },
     on: {
       "change": function($event) {
@@ -692,10 +774,10 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "okbtn"
   }, [_c('van-button', {
     attrs: {
-      "type": "primary",
+      "color": "#FFD161",
       "size": "large",
       "eventid": '17',
-      "mpcomid": '21'
+      "mpcomid": '22'
     },
     on: {
       "click": _vm.ok
@@ -715,4 +797,4 @@ if (false) {
 
 /***/ })
 
-},[50]);
+},[52]);

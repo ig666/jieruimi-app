@@ -1,6 +1,7 @@
 <template>
   <div class="form">
     <!-- 弹出层 -->
+    <van-notify id="van-notify" />
     <van-popup
       :show="show"
       position="top"
@@ -13,7 +14,7 @@
           v-for="(item, index) of form.discoverItemList"
           :text="item.location"
           :key="index"
-          @click="checkDetails(item,index)"
+          @click="checkDetails(item, index)"
         >
         </van-grid-item>
         <van-grid-item
@@ -32,7 +33,8 @@
           }
         "
         type="info"
-      >添加发现情况</van-button>
+        >添加发现情况</van-button
+      >
     </van-sticky>
     <!-- 内容 -->
     <div class="title">现场有害生物防治服务报告</div>
@@ -46,22 +48,18 @@
           label="客户名称"
           placeholder="请输入客户名称"
         />
-        <picker
-          mode="date"
-          @change="checkDateChange"
-        >
+        <picker mode="date" @change="checkDateChange">
           <van-field
+            readonly
             :value="form.checkDate"
             required
             label="检查日期"
             placeholder="请选择检查日期"
           />
         </picker>
-        <picker
-          mode="date"
-          @change="reportDateChange"
-        >
+        <picker mode="date" @change="reportDateChange">
           <van-field
+            readonly
             :value="form.reportDate"
             required
             label="报告日期"
@@ -157,11 +155,7 @@
       </van-cell-group>
     </van-cell-group>
     <div class="okbtn">
-      <van-button
-        @click="ok"
-        type="primary"
-        size="large"
-      >生成报告</van-button>
+      <van-button @click="ok" color="#FFD161" size="large">生成报告</van-button>
     </div>
   </div>
 </template>
@@ -169,6 +163,7 @@
 <script>
 import store from "../../store/store";
 import { request } from "@/request/request";
+import Notify from "../../../static/vant/notify/notify";
 const situations = store.state.situations;
 export default {
   data() {
@@ -195,6 +190,39 @@ export default {
     };
   },
   methods: {
+    checkData() {
+      let phone = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/;
+      if (!this.form.name) {
+        Notify({ type: "warning", message: "请填写客户名称" });
+        return false;
+      } else if (!this.form.checkDate) {
+        Notify({ type: "warning", message: "请选择检查日期" });
+        return false;
+      } else if (!this.form.reportDate) {
+        Notify({ type: "warning", message: "请选择报告日期" });
+        return false;
+      } else if (!this.form.checkPerson) {
+        Notify({ type: "warning", message: "请填写检查人员" });
+        return false;
+      } else if (!this.form.checkArea) {
+        Notify({ type: "warning", message: "请填写检查区域" });
+        return false;
+      } else if (!this.form.overallDescription) {
+        Notify({ type: "warning", message: "请填写整体虫鼠患情况描述" });
+        return false;
+      } else if (!this.form.serviceProvider) {
+        Notify({ type: "warning", message: "请填写服务商名称" });
+        return false;
+      } else if (!this.form.server) {
+        Notify({ type: "warning", message: "请填写服务人员" });
+        return false;
+      } else if (!phone.test(this.form.phone)) {
+        Notify({ type: "warning", message: "请填写正确手机号" });
+        return false;
+      } else {
+        return true;
+      }
+    },
     //非受控组件值绑定
     modelChange(val, key) {
       for (let item in this.form) {
@@ -204,56 +232,71 @@ export default {
       }
     },
     ok() {
-      let arr = []
-      for (let item of this.form.discoverItemList) {
-        arr.push(item.pictureUrl)
+      if (!this.checkData()) {
+        return;
       }
-      this.syncLoad(this.uploadFile, arr).then(() => { request('ReportData',this.form,'POST') }).catch((res) => { wx.showToast({
-        title:'失败图片数组'+JSON.stringify(res),
-        duration:3000,
-        icon:'none',
-      }) })
+      let arr = [];
+      for (let item of this.form.discoverItemList) {
+        arr.push(item.pictureUrl);
+      }
+      this.syncLoad(this.uploadFile, arr)
+        .then(async () => {
+          let res = await request("ReportData", this.form, "POST");
+          if (res.code === 0) {
+            store.commit('clerament')
+            wx.switchTab({
+              url: "/pages/orders/main",
+            });
+          }
+        })
+        .catch((res) => {
+          wx.showToast({
+            title: "失败图片数组" + JSON.stringify(res),
+            duration: 3000,
+            icon: "none",
+          });
+        });
     },
     uploadFile(url) {
       return new Promise((resolve, reject) => {
         wx.uploadFile({
-          url: 'http://120.26.187.170/files', //开发者服务器 url
+          url: "http://120.26.187.170/files", //开发者服务器 url
           filePath: url, //要上传文件资源的路径
-          name: 'file', //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
-          success: res => {
-            resolve(res)
+          name: "file", //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+          success: (res) => {
+            resolve(res);
           },
           fail: (res) => {
-            reject(res)
-          }
+            reject(res);
+          },
         });
-      })
+      });
     },
     //多张图片顺序同步上传
     syncLoad(fn, arr, handler) {
-      if (typeof fn !== 'function') throw TypeError('第一个参数必须是function')
-      if (!Array.isArray(arr)) throw TypeError('第二个参数必须是数组')
+      if (typeof fn !== "function") throw TypeError("第一个参数必须是function");
+      if (!Array.isArray(arr)) throw TypeError("第二个参数必须是数组");
       handler = (url, index) => {
-        this.form.discoverItemList[index].pictureUrl = url
-      }
-      const errors = []
-      return load(0)
+        this.form.discoverItemList[index].pictureUrl = url;
+      };
+      const errors = [];
+      return load(0);
       function load(index) {
         if (index >= arr.length) {
-          return errors.length > 0 ? Promise.reject(errors) : Promise.resolve()
+          return errors.length > 0 ? Promise.reject(errors) : Promise.resolve();
         }
         return fn(arr[index])
-          .then(res => {
-            handler(res.data, index)
+          .then((res) => {
+            handler(res.data, index);
           })
-          .catch(err => {
-            console.log(err)
-            errors.push(arr[index])
-            return load(index + 1)
+          .catch((err) => {
+            console.log(err);
+            errors.push(arr[index]);
+            return load(index + 1);
           })
           .then(() => {
-            return load(index + 1)
-          })
+            return load(index + 1);
+          });
       }
     },
     checkDateChange(val) {
@@ -280,7 +323,19 @@ export default {
         });
       }
     },
+    //重置
+    reset() {
+      for (let key in this.form) {
+        console.log(key)
+        if (key !== "discoverItemList") {
+          this.form[key] = "";
+        }
+      }
+    },
   },
+  onLoad(){
+    this.reset()
+  }
 };
 </script>
 
