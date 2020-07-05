@@ -1,14 +1,14 @@
 
-.home.data-v-78588440 {
+.home.data-v-183054e4 {
   height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
-.home ._h1.data-v-78588440 {
+.home ._h1.data-v-183054e4 {
   color: #2bc977;
 }
-.home .video.data-v-78588440 {
+.home .video.data-v-183054e4 {
   margin-top: 20rpx;
   width: 100%;
 }
