@@ -1,23 +1,23 @@
 
-.mine .mine-news.data-v-3414536d {
+.mine .mine-news.data-v-385a067b {
   background-color: #ffd161;
   padding: 40rpx;
   display: flex;
   align-items: center;
 }
-.mine .mine-news ._img.data-v-3414536d {
+.mine .mine-news ._img.data-v-385a067b {
   height: 110rpx;
   width: 110rpx;
   border-radius: 110rpx;
 }
-.mine .mine-news ._div.data-v-3414536d {
+.mine .mine-news ._div.data-v-385a067b {
   margin-left: 20rpx;
 }
-.mine .mine-news ._div .phone.data-v-3414536d {
+.mine .mine-news ._div .phone.data-v-385a067b {
   margin-top: 15rpx;
   font-size: 28rpx;
   color: #666666;
 }
-.mine .cells.data-v-3414536d {
+.mine .cells.data-v-385a067b {
   margin-top: 15rpx;
 }
