@@ -22,7 +22,7 @@
           </i-cell>
         </view>
       </i-swipeout>
-      <div class="more">没有更多啦~</div>
+      <div class="more" v-show="unNextPage">没有更多啦~</div>
     </scroll-view>
   </div>
 </template>
