@@ -85,6 +85,22 @@
           :autosize="autosize"
         />
         <van-field
+          :value="form.accompanyPerson"
+          @change="modelChange($event, 'accompanyPerson')"
+          clearable
+          label="随行人员"
+          placeholder="请输入随行人员"
+        />
+        <van-field
+          :value="form.inspectionItem"
+          @change="modelChange($event, 'inspectionItem')"
+          clearable
+          label="检查项目"
+          placeholder="请输入检查项目"
+          type="textarea"
+          :autosize="autosize"
+        />
+        <van-field
           :value="form.overallDescription"
           required
           @change="modelChange($event, 'overallDescription')"
@@ -118,40 +134,6 @@
           label="联系电话"
           placeholder="请输入联系电话"
         />
-        <van-field
-          :value="form.accompanyPerson"
-          @change="modelChange($event, 'accompanyPerson')"
-          clearable
-          label="随行人员"
-          placeholder="请输入随行人员"
-        />
-        <van-field
-          :value="form.inspectionItem"
-          @change="modelChange($event, 'inspectionItem')"
-          clearable
-          label="检查项目"
-          placeholder="请输入检查项目"
-          type="textarea"
-          :autosize="autosize"
-        />
-        <van-field
-          :value="form.checkMethod"
-          @change="modelChange($event, 'checkMethod')"
-          clearable
-          label="检查方法"
-          placeholder="请输入检查方法"
-          type="textarea"
-          :autosize="autosize"
-        />
-        <van-field
-          :value="form.remark"
-          @change="modelChange($event, 'remark')"
-          clearable
-          label="备注"
-          placeholder="请输入备注"
-          type="textarea"
-          :autosize="autosize"
-        />
       </van-cell-group>
     </van-cell-group>
     <div class="okbtn">
@@ -183,7 +165,6 @@ export default {
         server: "",
         phone: "",
         checkMethod: "",
-        remark: "",
         discoverItemList: situations,
       },
       autosize: { maxHeight: 100, minHeight: 50 },
@@ -243,7 +224,7 @@ export default {
         .then(async () => {
           let res = await request("ReportData", this.form, "POST");
           if (res.code === 0) {
-            store.commit('clerament')
+            store.commit("clerament");
             wx.switchTab({
               url: "/pages/orders/main",
             });
@@ -326,16 +307,16 @@ export default {
     //重置
     reset() {
       for (let key in this.form) {
-        console.log(key)
+        console.log(key);
         if (key !== "discoverItemList") {
           this.form[key] = "";
         }
       }
     },
   },
-  onLoad(){
-    this.reset()
-  }
+  onLoad() {
+    this.reset();
+  },
 };
 </script>
 

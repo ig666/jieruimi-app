@@ -2,3 +2,8 @@
 .orders.data-v-2198374d {
   height: 100%;
 }
+.orders .more.data-v-2198374d {
+  text-align: center;
+  margin-top: 30rpx;
+  font-size: 28rpx;
+}

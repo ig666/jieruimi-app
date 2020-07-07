@@ -1,7 +1,6 @@
 export  let request = (url, data, method = "GET",tokens) => {
   return new Promise((resolve, reject) => {
-    let token=tokens?tokens:wx.getStorageSync('token');
-    console.log(token,'token')
+    let token='bearer '+wx.getStorageSync('token');
     wx.showLoading({
       title: "加载中",
     });

@@ -116,31 +116,38 @@ export default {
     },
     // 登录
     async loginIn() {
-      wx.setStorageSync(
-        "token",
-        "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTM5MDAzNjgsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsibnVsbCIsIlJPTEVfVVNFUiJdLCJqdGkiOiI0OGM1MTk2Yi05MzBkLTQyYWUtOGEzOC1hYWQ3MTU3NWQ2YTQiLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.FwxWsRoaSIidJqcLy37PkuGkcUTUMjaB-0UBwjj4G3g"
-      );
-      wx.reLaunch({ url: "/pages/mine/main" });
-      // this.loading = true;
-      // let res = await request(
-      //   `oauth/token?grant_type=password&username=${this.userPhone}&password=${this.code}`,
-      //   {},
-      //   "POST",
-      //   "Basic Y2xpZW50OnN1bi4xMzE0"
+      // wx.setStorageSync(
+      //   "token",
+      //   "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTM5MDAzNjgsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsibnVsbCIsIlJPTEVfVVNFUiJdLCJqdGkiOiI0OGM1MTk2Yi05MzBkLTQyYWUtOGEzOC1hYWQ3MTU3NWQ2YTQiLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.FwxWsRoaSIidJqcLy37PkuGkcUTUMjaB-0UBwjj4G3g"
       // );
-      // console.log(res);
-      // if (res.status === 0) {
-      //   this.loading = false;
-      //   wx.setStorage({
-      //     key: "token",
-      //     data: res.result.token,
-      //     success: () => {
-      //       wx.redirectTo({ url: "/pages/mine/main" });
-      //     },
-      //   });
-      // } else {
-      //   this.loading = false;
-      // }
+      // wx.reLaunch({ url: "/pages/mine/main" });
+      this.loading = true;
+      wx.request({
+        url: `http://120.26.187.170:8080/oauth/token?grant_type=password&username=${this.userPhone}&password=${this.code}`, //仅为示例，并非真实的接口地址
+        header: {
+          "content-type": "application/json", // 默认值
+          Authorization: "Basic Y2xpZW50OnN1bi4xMzE0",
+        },
+        method: "POST",
+        success: (res) => {
+          if (res.statusCode === 200) {
+            this.loading = false;
+            wx.setStorage({
+              key: "token",
+              data: res.data.access_token,
+              success: async () => {
+                let res = await request("user-info", {}, "GET");
+                if (res) {
+                  wx.setStorageSync("data", res);
+                  wx.reLaunch({ url: "/pages/mine/main" });
+                }
+              },
+            });
+          } else {
+            this.loading = false;
+          }
+        },
+      });
     },
   },
   onUnload() {

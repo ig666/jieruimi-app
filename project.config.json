@@ -89,6 +89,13 @@
 					"id": -1,
 					"name": "pages/orders/main",
 					"pathName": "pages/orders/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/addLogo/main",
+					"pathName": "pages/addLogo/main",
 					"scene": null
 				}
 			]

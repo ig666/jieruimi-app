@@ -10,14 +10,13 @@
       custom-class="chooseimg"
     >
       <div
-        style="border-bottom: 1px solid #F5F5F5;"
+        style="border-bottom: 1px solid #f5f5f5;"
         @click="choosePhoto('camera')"
-      >拍照</div>
+      >
+        拍照
+      </div>
       <div @click="choosePhoto('album')">从手机相册选择</div>
-      <div
-        style="border-top:20rpx solid #F8F8FA;"
-        @click="onClose"
-      >取消</div>
+      <div style="border-top: 20rpx solid #f8f8fa;" @click="onClose">取消</div>
     </van-popup>
     <van-cell-group>
       <van-field
@@ -69,7 +68,7 @@
       <div class="photo">
         <van-button
           v-if="!imgUrl"
-          custom-style='height:200rpx'
+          custom-style="height:200rpx"
           block
           plain
           @click="chooseImg"
@@ -82,10 +81,10 @@
           v-else
           :src="imgUrl"
           alt=""
-        >
+        />
         <van-icon
-        @click="deleteImg"
-          v-if='imgUrl'
+          @click="deleteImg"
+          v-if="imgUrl"
           color="#F4778E"
           name="clear"
         />
@@ -93,22 +92,12 @@
     </div>
     <div class="okbtn">
       <div class="btn">
-        <van-button
-          size="large"
-          type="primary"
-          @click="ok"
-        >确定</van-button>
+        <van-button size="large" type="primary" @click="ok">确定</van-button>
       </div>
-      <div
-        class="btn"
-        style="margin-left: 40rpx;"
-        v-if="type === 'update'"
-      >
-        <van-button
-          size="large"
-          type="danger"
-          @click="deleteSituation"
-        >删除</van-button>
+      <div class="btn" style="margin-left: 40rpx;" v-if="type === 'update'">
+        <van-button size="large" type="danger" @click="deleteSituation"
+          >删除</van-button
+        >
       </div>
     </div>
   </div>
@@ -129,6 +118,7 @@ export default {
         description: "",
         potentialRisks: "",
         suggest: "",
+        remark: "",
         pictureUrl: "",
       },
     };
@@ -140,10 +130,10 @@ export default {
       eventChannel.on("detailNew", ({ data }) => {
         this.situation = data.item;
         this.index = data.index;
-        this.imgUrl=this.situation.pictureUrl
+        this.imgUrl = this.situation.pictureUrl;
       });
     } else {
-      this.imgUrl=''
+      this.imgUrl = "";
       this.situation = {
         location: "",
         description: "",
@@ -154,33 +144,33 @@ export default {
     }
   },
   methods: {
-    deleteImg(){
-      this.imgUrl=''
+    deleteImg() {
+      this.imgUrl = "";
     },
     //选取照片方式
     choosePhoto(type) {
-      this.show = false
+      this.show = false;
       wx.chooseImage({
         count: 1,
-        sizeType: ['compressed'],
+        sizeType: ["compressed"],
         sourceType: [type],
         success: (res) => {
-          this.imgUrl = res.tempFilePaths[0]
-          this.show = false
-        }
-      })
+          this.imgUrl = res.tempFilePaths[0];
+          this.show = false;
+        },
+      });
     },
     chooseImg() {
-      this.show = true
+      this.show = true;
     },
     onClose() {
-      this.show = false
+      this.show = false;
     },
     previewImage() {
       wx.previewImage({
         current: this.imgUrl,
-        urls: [this.imgUrl] // 需要预览的图片http链接列表
-      })
+        urls: [this.imgUrl], // 需要预览的图片http链接列表
+      });
     },
     deleteSituation() {
       store.commit("decrement", this.index);
@@ -188,14 +178,12 @@ export default {
     },
     //非受控组件值绑定
     modelChange(val, key) {
-      for (let item in this.situation) {
-        if (item === key) {
-          this.situation[item] = val.mp.detail;
-        }
-      }
+      console.log(key,val)
+      this.situation[key] = val.mp.detail;
     },
     ok() {
-      this.situation.pictureUrl=this.imgUrl
+      this.situation.pictureUrl = this.imgUrl;
+      console.log(this.situation)
       if (this.type === "update") {
         wx.navigateBack();
       } else {

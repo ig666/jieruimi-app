@@ -19,20 +19,25 @@ import store from "../../store/store";
 export default {
   data() {
     return {
-      name: "陈琦大哥哥",
-      phone: "18308417585",
+      name: "",
+      phone: "",
     };
   },
   methods: {
     addForm() {
       wx.navigateTo({ url: "/pages/addForm/main" });
     },
-    addLogo(){
+    addLogo() {
       wx.navigateTo({ url: "/pages/addLogo/main" });
-    }
+    },
   },
-  onShow(){
-    store.commit('clerament')
+  onShow() {
+    let data = wx.getStorageSync("data");
+    if (data) {
+      this.name = data.userName;
+      this.phone = data.phone;
+    }
+    store.commit("clerament");
   },
   onLoad() {
     let token = wx.getStorageSync("token");

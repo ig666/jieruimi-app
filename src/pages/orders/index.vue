@@ -1,6 +1,10 @@
 <template>
   <div class="orders">
-    <scroll-view @scrolltolower="scrolltolower" scroll-y style="height: 100%; margin-top: 20rpx;">
+    <scroll-view
+      @scrolltolower="scrolltolower"
+      scroll-y
+      style="height: 100%; margin-top: 20rpx;"
+    >
       <i-swipeout
         @change="change($event, item.id)"
         i-class="i-swipeout-demo-item"
@@ -18,6 +22,7 @@
           </i-cell>
         </view>
       </i-swipeout>
+      <div class="more">没有更多啦~</div>
     </scroll-view>
   </div>
 </template>
@@ -27,9 +32,10 @@ import { request } from "@/request/request";
 export default {
   data() {
     return {
+      unNextPage: false,
       page: {
-        size: 3,
-        page: 0
+        size: 10,
+        page: 0,
       },
       actions: [
         {
@@ -56,15 +62,21 @@ export default {
 
   methods: {
     scrolltolower(res) {
-      this.page.page+=1
-      this.getList()
+      if (this.unNextPage) {
+        return;
+      }
+      this.page.page += 1;
+      this.getList();
     },
     change({ target }, id) {
-      console.log(target.index);
+      let userName = wx.getStorageSync("data").userName;
       if (target.index === 0) {
+        wx.showLoading({
+          title: "文件下载中",
+        });
         wx.downloadFile({
           // 示例 url，并非真实存在
-          url: `http://120.26.187.170/pdf/${id}`,
+          url: `http://120.26.187.170/pdf/${id}?userName=${userName}`,
           success: function (res) {
             const filePath = res.tempFilePath;
             console.log(res, "res");
@@ -73,6 +85,7 @@ export default {
               fileType: "pdf",
               filePath: filePath,
               success: function (res) {
+                wx.hideLoading();
                 console.log("打开文档成功", res);
               },
               fail: (res) => {
@@ -86,7 +99,7 @@ export default {
       }
     },
     async deleteRport(id) {
-      this.reset()
+      this.reset();
       let res = await request(`ReportData/${id}`, {}, "DELETE");
       if (res.code === 200) {
         this.getList();
@@ -94,20 +107,24 @@ export default {
     },
     async getList() {
       let res = await request("ReportData/page", this.page);
-      this.list =this.list.concat(res.content)
+      this.list = this.list.concat(res.content);
+      if (res.empty) {
+        this.unNextPage = true;
+      }
     },
     //重置
-    reset(){
-      this.page={
-        size: 3,
-        page: 0
-      }
-      this.list=[]
-    }
+    reset() {
+      this.page = {
+        size: 10,
+        page: 0,
+      };
+      this.list = [];
+      this.unNextPage=false
+    },
   },
   async onShow() {
-    this.reset()
-   this.getList()
+    this.reset();
+    this.getList();
   },
 };
 </script>
@@ -115,5 +132,10 @@ export default {
 <style lang="less" scoped>
 .orders {
   height: 100%;
+  .more {
+    text-align: center;
+    margin-top: 30rpx;
+    font-size: 28rpx;
+  }
 }
 </style>

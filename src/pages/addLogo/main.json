@@ -1,8 +1,8 @@
 {
-    "navigationBarTitleText": "更换LOGO",
-    "usingComponents": {
-      "van-cell": "/static/vant/cell/index",
-    "van-cell-group": "/static/vant/cell-group/index"
-    }
+  "navigationBarTitleText": "更换LOGO",
+  "usingComponents": {
+    "van-cell": "/static/vant/cell/index",
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-button": "/static/vant/button/index"
   }
-  
+}
