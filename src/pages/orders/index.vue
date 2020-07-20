@@ -76,7 +76,7 @@ export default {
         });
         wx.downloadFile({
           // 示例 url，并非真实存在
-          url: `http://120.26.187.170/pdf/${id}?userName=${userName}`,
+          url: `https://jieruimi.top/api/pdf/${id}?userName=${userName}`,
           success: function (res) {
             const filePath = res.tempFilePath;
             console.log(res, "res");

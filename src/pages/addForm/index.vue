@@ -241,7 +241,7 @@ export default {
     uploadFile(url) {
       return new Promise((resolve, reject) => {
         wx.uploadFile({
-          url: "http://120.26.187.170/files", //开发者服务器 url
+          url: "https://jieruimi.top/api/files", //开发者服务器 url
           filePath: url, //要上传文件资源的路径
           name: "file", //文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
           success: (res) => {

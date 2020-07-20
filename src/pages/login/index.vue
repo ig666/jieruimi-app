@@ -123,7 +123,7 @@ export default {
       // wx.reLaunch({ url: "/pages/mine/main" });
       this.loading = true;
       wx.request({
-        url: `http://120.26.187.170:8080/oauth/token?grant_type=password&username=${this.userPhone}&password=${this.code}`, //仅为示例，并非真实的接口地址
+        url: `https://jieruimi.top/login/oauth/token?grant_type=password&username=${this.userPhone}&password=${this.code}`, //仅为示例，并非真实的接口地址
         header: {
           "content-type": "application/json", // 默认值
           Authorization: "Basic Y2xpZW50OnN1bi4xMzE0",

@@ -8,7 +8,7 @@ export  let request = (url, data, method = "GET",tokens) => {
       header:{
         Authorization:token
       },
-      url: "http://120.26.187.170/" + url, //开发者服务器接口地址",
+      url: "https://jieruimi.top/api/" + url, //开发者服务器接口地址",
       data: data, //请求的参数",
       method: method,
       dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
