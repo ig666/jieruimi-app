@@ -1,7 +1,5 @@
 <template>
   <div class="login">
-    <!-- 提示 -->
-    <van-notify id="van-notify" />
     <!-- 内容 -->
     <div class="own">
       <img src="/static/images/logo_maincolor@3x.png" alt class="log" />
@@ -55,28 +53,7 @@ export default {
   },
   components: {},
 
-  onLoad() {
-    wx.getSystemInfo({
-      success: (res) => {
-        if (res.environment === "wxwork") {
-          console.log("企业微信端");
-        } else {
-          console.log("小程序端");
-        }
-      },
-    });
-  },
-  // watch: {
-  //   userPhone(val) {
-  //     if (/^1[3456789]\d{9}$/.test(val)) {
-  //       this.btnColor = "#5862CB";
-  //       this.loginDisabled = false;
-  //     } else {
-  //       this.btnColor = "#CCCCCC";
-  //       this.loginDisabled = true;
-  //     }
-  //   },
-  // },
+  onLoad() {},
 
   methods: {
     // 非受控组件动态改变值
@@ -87,40 +64,8 @@ export default {
     phoneChange(e) {
       this.userPhone = e.mp.detail;
     },
-    // 发送验证码
-    async sendCode() {
-      if (!this.disabled) {
-        if (!/^1[3456789]\d{9}$/.test(this.userPhone)) {
-          Notify({ type: "warning", message: "请输入正确手机号" });
-        } else {
-          let res = await request("Authenticate/GetCore", {
-            phone: this.userPhone,
-          });
-          if (res.status === 0) {
-            let time = 60;
-            this.disabled = true;
-            this.timeChange = setInterval(() => {
-              this.codeTime = time + "s";
-              time--;
-            }, 1000);
-            setTimeout(() => {
-              this.codeTime = "获取验证码";
-              this.disabled = false;
-              clearInterval(this.timeChange);
-            }, 60 * 1000);
-            this.btnColor = "#5862CB";
-          }
-        }
-      } else {
-      }
-    },
     // 登录
     async loginIn() {
-      // wx.setStorageSync(
-      //   "token",
-      //   "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTM5MDAzNjgsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsibnVsbCIsIlJPTEVfVVNFUiJdLCJqdGkiOiI0OGM1MTk2Yi05MzBkLTQyYWUtOGEzOC1hYWQ3MTU3NWQ2YTQiLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.FwxWsRoaSIidJqcLy37PkuGkcUTUMjaB-0UBwjj4G3g"
-      // );
-      // wx.reLaunch({ url: "/pages/mine/main" });
       this.loading = true;
       wx.request({
         url: `https://jieruimi.top/login/oauth/token?grant_type=password&username=${this.userPhone}&password=${this.code}`, //仅为示例，并非真实的接口地址
@@ -144,8 +89,21 @@ export default {
               },
             });
           } else {
+            wx.showToast({
+              title: `登陆失败:${res.error_description}`,
+              icon: "none",
+              duration: 2000,
+            });
             this.loading = false;
           }
+        },
+        fail: (res) => {
+          wx.showToast({
+            title: `登陆失败:${res.errMsg}`,
+            icon: "none",
+            duration: 2000,
+          });
+          this.loading = false;
         },
       });
     },

@@ -27,6 +27,10 @@ VantComponent({
       type: Number,
       value: Infinity,
     },
+    selectedIcon: {
+      type: String,
+      value: 'success',
+    },
   },
   data: {
     subItems: [],
@@ -58,7 +62,7 @@ VantComponent({
     updateSubItems() {
       const { items, mainActiveIndex } = this.data;
       const { children = [] } = items[mainActiveIndex] || {};
-      return this.set({ subItems: children });
+      this.setData({ subItems: children });
     },
   },
 });

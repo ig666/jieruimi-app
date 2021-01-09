@@ -1,5 +1,5 @@
 import { VantComponent } from '../common/component';
-const nextTick = () => new Promise((resolve) => setTimeout(resolve, 20));
+import { setContentAnimate } from './animate';
 VantComponent({
   classes: ['title-class', 'content-class'],
   relation: {
@@ -25,25 +25,16 @@ VantComponent({
     },
   },
   data: {
-    contentHeight: 0,
     expanded: false,
-    transition: false,
   },
   mounted() {
-    this.updateExpanded()
-      .then(nextTick)
-      .then(() => {
-        const data = { transition: true };
-        if (this.data.expanded) {
-          data.contentHeight = 'auto';
-        }
-        this.setData(data);
-      });
+    this.updateExpanded();
+    this.mounted = true;
   },
   methods: {
     updateExpanded() {
       if (!this.parent) {
-        return Promise.resolve();
+        return;
       }
       const { value, accordion } = this.parent.data;
       const { children = [] } = this.parent;
@@ -53,26 +44,10 @@ VantComponent({
       const expanded = accordion
         ? value === currentName
         : (value || []).some((name) => name === currentName);
-      const stack = [];
       if (expanded !== this.data.expanded) {
-        stack.push(this.updateStyle(expanded));
+        setContentAnimate(this, expanded, this.mounted);
       }
-      stack.push(this.set({ index, expanded }));
-      return Promise.all(stack);
-    },
-    updateStyle(expanded) {
-      return this.getRect('.van-collapse-item__content')
-        .then((rect) => rect.height)
-        .then((height) => {
-          if (expanded) {
-            return this.set({
-              contentHeight: height ? `${height}px` : 'auto',
-            });
-          }
-          return this.set({ contentHeight: `${height}px` })
-            .then(nextTick)
-            .then(() => this.set({ contentHeight: 0 }));
-        });
+      this.setData({ index, expanded });
     },
     onClick() {
       if (this.data.disabled) {
@@ -82,13 +57,6 @@ VantComponent({
       const index = this.parent.children.indexOf(this);
       const currentName = name == null ? index : name;
       this.parent.switch(currentName, !expanded);
-    },
-    onTransitionEnd() {
-      if (this.data.expanded) {
-        this.setData({
-          contentHeight: 'auto',
-        });
-      }
     },
   },
 });

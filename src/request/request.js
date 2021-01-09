@@ -20,7 +20,6 @@ export  let request = (url, data, method = "GET",tokens) => {
           })
         }
         if(res.statusCode!==200){
-          console.log(res)
           wx.showToast({
             title: res.data.error,
             icon:'none',
