@@ -164,7 +164,6 @@ export default {
         serviceProvider: "",
         server: "",
         phone: "",
-        checkMethod: "",
         discoverItemList: situations,
       },
       autosize: { maxHeight: 100, minHeight: 50 },
@@ -206,11 +205,7 @@ export default {
     },
     //非受控组件值绑定
     modelChange(val, key) {
-      for (let item in this.form) {
-        if (item === key) {
-          this.form[item] = val.mp.detail;
-        }
-      }
+      this.form[key] = val.mp.detail;
     },
     ok() {
       if (!this.checkData()) {
@@ -223,6 +218,7 @@ export default {
       this.syncLoad(this.uploadFile, arr)
         .then(async () => {
           let res = await request("ReportData", this.form, "POST");
+          this.reset()
           if (res.code === 0) {
             store.commit("clerament");
             wx.switchTab({
@@ -307,7 +303,6 @@ export default {
     //重置
     reset() {
       for (let key in this.form) {
-        console.log(key);
         if (key !== "discoverItemList") {
           this.form[key] = "";
         }
@@ -315,7 +310,6 @@ export default {
     },
   },
   onLoad() {
-    this.reset();
   },
 };
 </script>

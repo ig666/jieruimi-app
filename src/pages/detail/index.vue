@@ -178,12 +178,10 @@ export default {
     },
     //非受控组件值绑定
     modelChange(val, key) {
-      console.log(key,val)
       this.situation[key] = val.mp.detail;
     },
     ok() {
       this.situation.pictureUrl = this.imgUrl;
-      console.log(this.situation)
       if (this.type === "update") {
         wx.navigateBack();
       } else {
